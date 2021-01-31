@@ -52,6 +52,15 @@
             android:textColor="@android:color/white"
 
             />
+
+        <TextView
+            android:id="@+id/lb_rec_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="¿Olvido su contraseña?"
+            android:textStyle="italic" />
     </LinearLayout>
 
 

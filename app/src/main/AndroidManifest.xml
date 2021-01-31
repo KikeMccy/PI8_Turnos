@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PI8_Turnos">
-        <activity android:name=".ModificarUserActivity"></activity>
+        <activity android:name=".RecuperarPasswordActivity"></activity>
+        <activity android:name=".ModificarUserActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".RegistroActivity" />

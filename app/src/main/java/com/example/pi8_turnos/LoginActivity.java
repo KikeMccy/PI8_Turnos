@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pi8_turnos.Model.Entidades;
@@ -22,6 +23,7 @@ import java.util.UUID;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private TextView lb_password;
     private EditText txt_email, txt_password;
     private Button btn_login, btn_registro;
     private String email="",password="";
@@ -35,6 +37,14 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         txt_email=(EditText) findViewById(R.id.txt_email_login);
         txt_password=(EditText) findViewById(R.id.txt_password_login);
+        lb_password=(TextView) findViewById(R.id.lb_rec_pass);
+        lb_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,RecuperarPasswordActivity.class));
+            }
+        });
+
         btn_registro=(Button) findViewById(R.id.btn_registrarse);
         btn_registro.setOnClickListener(new View.OnClickListener() {
             @Override
