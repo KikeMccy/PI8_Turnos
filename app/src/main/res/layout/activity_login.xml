@@ -13,41 +13,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Correo electronico"
-        />
+        android:hint="Correo electronico" />
+
     <EditText
         android:id="@+id/txt_password_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
         android:layout_marginTop="20dp"
-        android:inputType="textPassword"
-        />
+        android:hint="Contraseña"
+        android:inputType="textPassword" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@color/teal_700"
+            android:background="#BD3025"
+            android:backgroundTint="@color/purple_500"
             android:text="Iniciar sesion"
-            android:textColor="@android:color/white"
 
-            />
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#932D2D"
+            android:textColorHint="#C33434"
+            app:rippleColor="@color/purple_500" />
+
         <Button
             android:id="@+id/btn_registrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/teal_200"
+            android:layout_marginTop="20dp"
             android:text="Registrarse"
             android:textColor="@android:color/white"
-            android:layout_marginTop="20dp"
 
             />
     </LinearLayout>
