@@ -2,6 +2,7 @@ package com.example.pi8_turnos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class PrincipalActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
+        setSupportActionBar(toolbar);
         lb_nombre=(TextView) findViewById(R.id.txt_nombre_user);
         lb_email=(TextView) findViewById(R.id.txt_email_user);
 

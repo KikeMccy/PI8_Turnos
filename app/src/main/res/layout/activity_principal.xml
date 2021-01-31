@@ -5,9 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".PrincipalActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/purple_500"
+        android:layout_marginRight="20dp"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+        />
     <TextView
         android:id="@+id/txt_nombre_user"
         android:layout_width="match_parent"
@@ -15,6 +26,7 @@
         android:text="Nombre de usuario"
         android:textAlignment="center"
         android:textSize="18sp"
+        android:layout_marginTop="50dp"
         />
     <TextView
         android:id="@+id/txt_email_user"

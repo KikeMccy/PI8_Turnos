@@ -20,6 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="Correo electronico"
+        android:ems="10"
+        android:inputType="textEmailAddress"
         />
     <EditText
         android:id="@+id/txt_password"

@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Correo electronico" />
+        android:hint="Correo electronico"
+        android:ems="10"
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/txt_password_login"
@@ -46,7 +48,7 @@
         <Button
             android:id="@+id/btn_registrarse"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="59dp"
             android:layout_marginTop="20dp"
             android:text="Registrarse"
             android:textColor="@android:color/white"
