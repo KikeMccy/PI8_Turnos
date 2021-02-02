@@ -3,8 +3,10 @@ package com.example.pi8_turnos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,13 +21,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class RegistroActivity extends AppCompatActivity {
 
     private EditText txt_nombre,txt_email,txt_password;
     private Button button_registrar;
-
+    private ProgressDialog mDialog;
     private String nombre="",email="",password="";
+
 
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
@@ -36,7 +40,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-
+        mDialog=new ProgressDialog(this);
         txt_nombre=(EditText)findViewById(R.id.txt_nombre);
         txt_email=(EditText)findViewById(R.id.txt_email);
         txt_password=(EditText)findViewById(R.id.txt_password);
@@ -48,17 +52,28 @@ public class RegistroActivity extends AppCompatActivity {
                 email=txt_email.getText().toString();
                 password=txt_password.getText().toString();
 
-
                 if(!nombre.isEmpty() && !email.isEmpty() && !password.isEmpty()){
                     if(password.length()>=6){
-
+                        mDialog.setMessage("Espere un momento...");
+                        mDialog.setCanceledOnTouchOutside(false);
+                        mDialog.show();
                         registrar_Usuario();
                     }else {
-                        Toast.makeText(RegistroActivity.this,"La contraseña debe ser mayor a 6 caracteres", Toast.LENGTH_SHORT).show();
+                        txt_password.setError("Minimo 6 carateres");
+                        //Toast.makeText(RegistroActivity.this,"La contraseña debe ser mayor a 6 caracteres", Toast.LENGTH_SHORT).show();
                     }
 
 
                 }else{
+                    if(nombre.equals("")){
+                        txt_nombre.setError("Ingrese el nombre");
+                    }
+                    if (email.equals("")){
+                        txt_email.setError("Ingrese email");
+                    }
+                    if (password.equals("")){
+                        txt_password.setError("Ingrese contraseña");
+                    }
                     Toast.makeText(RegistroActivity.this,"Debe completar los campos", Toast.LENGTH_SHORT).show();
                 }
 
@@ -92,6 +107,7 @@ public class RegistroActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(RegistroActivity.this,"No se pudo registrar usuario", Toast.LENGTH_SHORT).show();
                 }
+                mDialog.dismiss();
             }
         });
     }

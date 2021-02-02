@@ -3,6 +3,7 @@ package com.example.pi8_turnos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login, btn_registro;
     private String email="",password="";
     private FirebaseAuth firebaseAuth;
+    private ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         firebaseAuth=FirebaseAuth.getInstance();
+        mDialog=new ProgressDialog(this);
         txt_email=(EditText) findViewById(R.id.txt_email_login);
         txt_password=(EditText) findViewById(R.id.txt_password_login);
         lb_password=(TextView) findViewById(R.id.lb_rec_pass);
@@ -57,11 +60,21 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 email=txt_email.getText().toString();
                 password=txt_password.getText().toString();
                 if(!email.isEmpty() && !password.isEmpty()){
+                    mDialog.setMessage("Iniciando sesión...");
+                    mDialog.setCanceledOnTouchOutside(false);
+                    mDialog.show();
                     loginUsuario();
                 }else {
+                    if(email.equals("")){
+                        txt_email.setError("Ingrese email");
+                    }
+                    if(password.equals("")) {
+                        txt_password.setError("Ingrese contraseña");
+                    }
                     Toast.makeText(LoginActivity.this,"Complete los campos", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -78,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(LoginActivity.this,"Datos incorrectos", Toast.LENGTH_SHORT).show();
                 }
+                mDialog.dismiss();
             }
         });
     }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,13 +36,16 @@ public class RecuperarPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 email=txt_email.getText().toString();
-                if(!email.isEmpty()){
+                if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     mDialog.setMessage("Espere un momento...");
                     mDialog.setCanceledOnTouchOutside(false);
                     mDialog.show();
                     recuperarPassword();
                 }else {
-                    Toast.makeText(RecuperarPasswordActivity.this,"Debe ingresar el email",Toast.LENGTH_SHORT).show();
+                    if(email.equals("")){
+                     txt_email.setError("Ingrese email");
+                    }
+                    Toast.makeText(RecuperarPasswordActivity.this,"Email incorrecto",Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -59,7 +63,7 @@ public class RecuperarPasswordActivity extends AppCompatActivity {
                     startActivity(new Intent(RecuperarPasswordActivity.this,LoginActivity.class));
                     Toast.makeText(RecuperarPasswordActivity.this,"Se ha enviado un correo para restablecer la contraseña",Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(RecuperarPasswordActivity.this,"No se pudo recuperar contraseña",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecuperarPasswordActivity.this,"No se pudo restablecer, email no registrado",Toast.LENGTH_SHORT).show();
                 }
                 mDialog.dismiss();
             }

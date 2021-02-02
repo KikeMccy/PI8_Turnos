@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:layout_marginVertical="75dp"
-
         tools:context=".MainActivity">
 
 
@@ -60,11 +59,11 @@
             android:layout_marginStart="108dp"
             android:layout_marginTop="394dp"
             android:layout_marginEnd="109dp"
+            android:background="@drawable/redondear_boton"
+            android:textColor="@color/white"
             android:text="ACCEDER"
             app:icon="@drawable/ic_acceder"
-            app:iconGravity="textEnd"
             app:iconPadding="10dp"
-            app:rippleColor="@color/purple_500"
             />
 
 

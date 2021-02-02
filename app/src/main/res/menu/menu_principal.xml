@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/opc_modificar_user"
-        android:title="Editar perfil"
+        android:title="Editar nombre"
         app:showAsAction="never" />
 
     <item

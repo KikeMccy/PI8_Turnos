@@ -6,13 +6,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="@color/white"
     tools:context=".LoginActivity">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        <ImageView
+            android:id="@+id/img_login_user"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:contentDescription="Email reestablecer"
+            android:gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/user_login"
+            />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            >
 
     <EditText
         android:id="@+id/txt_email_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:hint="Correo electronico"
         android:ems="10"
         android:inputType="textEmailAddress"/>
@@ -34,26 +62,23 @@
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:background="#BD3025"
-            android:backgroundTint="@color/purple_500"
+            android:background="@drawable/redondear_boton"
             android:text="Iniciar sesion"
 
             android:textColor="#FFFFFF"
-            android:textColorHighlight="#932D2D"
-            android:textColorHint="#C33434"
             app:rippleColor="@color/purple_500" />
 
         <Button
             android:id="@+id/btn_registrarse"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:text="Registrarse"
-            android:textColor="@android:color/white"
+            android:background="@drawable/boton_registar"
 
-            />
+            android:text="Registrarse"
+            android:textColor="#4DB6AC" />
 
         <TextView
             android:id="@+id/lb_rec_pass"
@@ -62,8 +87,11 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="¿Olvido su contraseña?"
-            android:textStyle="italic" />
-    </LinearLayout>
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

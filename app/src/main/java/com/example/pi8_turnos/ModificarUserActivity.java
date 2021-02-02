@@ -3,6 +3,7 @@ package com.example.pi8_turnos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ModificarUserActivity extends AppCompatActivity {
     private TextView lb_nombre;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+    private ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,8 @@ public class ModificarUserActivity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-
-        lb_nombre=(TextView) findViewById(R.id.txt_nombre_update);
+        mDialog=new ProgressDialog(this);
+        //lb_nombre=(TextView) findViewById(R.id.txt_nombre_update);
         txt_nombre= (EditText) findViewById(R.id.txt_nombre_update);
         btn_modificar=(Button) findViewById(R.id.btn_update);
         btn_modificar.setOnClickListener(new View.OnClickListener() {
@@ -49,22 +51,31 @@ public class ModificarUserActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                String nombre=lb_nombre.getText().toString();;
-                            Map<String, Object> map=new HashMap<>();
-                            map.put("nombre",nombre);
-                            String id=firebaseAuth.getCurrentUser().getUid();
-                            databaseReference.child("Usuarios").child(id).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                        Toast.makeText(ModificarUserActivity.this,"Actualizado correctamente", Toast.LENGTH_SHORT).show();
-                                        lb_nombre.setText("");
-                                        startActivity(new Intent(ModificarUserActivity.this,PrincipalActivity.class));
-                                    }else {
-                                        Toast.makeText(ModificarUserActivity.this,"Error al actualizar", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                String nombre=txt_nombre.getText().toString();
+                if (nombre.equals("")) {
+                    txt_nombre.setError("Requiere datos");
+
+                }else {
+                    mDialog.setMessage("Actualizando...");
+                    mDialog.setCanceledOnTouchOutside(false);
+                    mDialog.show();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("nombre", nombre);
+                    String id = firebaseAuth.getCurrentUser().getUid();
+                    databaseReference.child("Usuarios").child(id).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(ModificarUserActivity.this, "Actualizado correctamente", Toast.LENGTH_SHORT).show();
+                                lb_nombre.setText("");
+                                startActivity(new Intent(ModificarUserActivity.this, PrincipalActivity.class));
+                            } else {
+                                Toast.makeText(ModificarUserActivity.this, "Error al actualizar", Toast.LENGTH_SHORT).show();
+                            }
+                            mDialog.dismiss();
+                        }
+                    });
+                }
             }
         });
 
