@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".PrincipalActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -19,6 +20,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
         />
+
     <TextView
         android:id="@+id/txt_bienvedida"
         android:layout_width="match_parent"
@@ -46,6 +48,55 @@
         android:textAlignment="center"
         android:textSize="18sp"
         />
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/img_btn_instituciones"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/boton_menu_principal"
+            />
+
+    <ImageButton
+        android:id="@+id/img_btn_turnos"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/boton_ver_turnos"
+         />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/img_btn_crear"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/boton_crear_institucion" />
+
+        <!--<ImageButton
+            android:id="@+id/img_btn_otros"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/boton_registar"
+            tools:srcCompat="@drawable/tiket_turno" />-->
+    </LinearLayout>
+
 
 
 </LinearLayout>

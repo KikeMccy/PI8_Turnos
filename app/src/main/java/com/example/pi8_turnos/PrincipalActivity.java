@@ -58,6 +58,7 @@ public class PrincipalActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+
             }
         });
     }
