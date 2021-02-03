@@ -11,21 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PI8_Turnos">
-        <activity android:name=".RecuperarPasswordActivity"></activity>
-        <activity android:name=".ModificarUserActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".PrincipalActivity" />
-        <activity android:name=".RegistroActivity" />
-       <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".Activity_entidades" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".RecuperarPasswordActivity" />
+        <activity android:name=".ModificarUserActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".PrincipalActivity" />
+        <activity android:name=".RegistroActivity" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name=".Activity_entidades" />
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 
