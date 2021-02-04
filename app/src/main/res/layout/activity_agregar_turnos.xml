@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarTurnosActivity">
+
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/toolbarprincipal"></include>
+    <TextView
+        android:id="@+id/tituloAgregarTurnos"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_below="@+id/appbar"
+        android:text="Programar Turnos"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/tituloTurnos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tituloAgregarTurnos"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Ingrese titulo"/>
+
+    <EditText
+        android:id="@+id/cantidadTurnos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tituloTurnos"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Ingrese cantidad de turnos"/>
+
+    <EditText
+        android:id="@+id/tiempoTurnos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cantidadTurnos"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Ingrese duracion turno"/>
+
+    <EditText
+        android:id="@+id/horaInicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tiempoTurnos"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:inputType="time"
+        android:focusable="false"
+        android:maxLines="1"
+        android:clickable="true"
+        android:onClick="clickHoraInicio"
+        android:hint="Seleccione hora de inicio"
+        android:textAlignment="viewStart"/>
+
+    <EditText
+        android:id="@+id/horaFin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horaInicio"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:inputType="time"
+        android:focusable="false"
+        android:maxLines="1"
+        android:clickable="true"
+        android:onClick="clickHoraFin"
+        android:hint="Seleccione hora de fin"
+        android:textAlignment="viewStart"/>
+
+    <EditText
+        android:id="@+id/fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horaFin"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:inputType="time"
+        android:focusable="false"
+        android:maxLines="1"
+        android:clickable="true"
+        android:textAlignment="viewStart"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fecha"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btnAgregarRecordatorio"
+            android:text="Guardar "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+</RelativeLayout>
