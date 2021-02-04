@@ -1,8 +1,10 @@
 package com.example.pi8_turnos;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,6 +42,16 @@ public class PrincipalActivity extends AppCompatActivity {
         lb_email=(TextView) findViewById(R.id.txt_email_user);
 
         getInfoUser();
+
+        /*Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        final DrawerLayout drawerLayout;
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();*/
 
     }
     private void getInfoUser(){
@@ -85,4 +97,9 @@ public class PrincipalActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void abrirCalendarioTurnos(View view){
+        startActivity(new Intent(PrincipalActivity.this,Calendario_Activity.class));
+    }
+
 }
