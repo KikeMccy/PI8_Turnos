@@ -25,10 +25,10 @@ import java.util.regex.Pattern;
 
 public class RegistroActivity extends AppCompatActivity {
 
-    private EditText txt_nombre,txt_email,txt_password;
+    private EditText txt_nombre,txt_email,txt_password,txt_cedula;
     private Button button_registrar;
     private ProgressDialog mDialog;
-    private String nombre="",email="",password="";
+    private String nombre="",email="",password="",cedula;
 
 
     FirebaseAuth firebaseAuth;
@@ -41,6 +41,7 @@ public class RegistroActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
         mDialog=new ProgressDialog(this);
+        txt_cedula=(EditText) findViewById(R.id.txt_cedula);
         txt_nombre=(EditText)findViewById(R.id.txt_nombre);
         txt_email=(EditText)findViewById(R.id.txt_email);
         txt_password=(EditText)findViewById(R.id.txt_password);
@@ -48,23 +49,32 @@ public class RegistroActivity extends AppCompatActivity {
         button_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cedula=txt_cedula.getText().toString();
                 nombre=txt_nombre.getText().toString();
                 email=txt_email.getText().toString();
                 password=txt_password.getText().toString();
 
-                if(!nombre.isEmpty() && !email.isEmpty() && !password.isEmpty()){
-                    if(password.length()>=6){
-                        mDialog.setMessage("Espere un momento...");
-                        mDialog.setCanceledOnTouchOutside(false);
-                        mDialog.show();
-                        registrar_Usuario();
+                if(!nombre.isEmpty() && !email.isEmpty() && !password.isEmpty() && !cedula.isEmpty()){
+                    if (cedula.length()==10){
+                        if(password.length()>=6){
+                            mDialog.setMessage("Espere un momento...");
+                            mDialog.setCanceledOnTouchOutside(false);
+                            mDialog.show();
+                            registrar_Usuario();
+                        }else {
+                            txt_password.setError("Minimo 6 carateres");
+                            //Toast.makeText(RegistroActivity.this,"La contraseña debe ser mayor a 6 caracteres", Toast.LENGTH_SHORT).show();
+                        }
                     }else {
-                        txt_password.setError("Minimo 6 carateres");
-                        //Toast.makeText(RegistroActivity.this,"La contraseña debe ser mayor a 6 caracteres", Toast.LENGTH_SHORT).show();
+                        txt_cedula.setError("Cédula incorrecta");
                     }
 
 
+
                 }else{
+                    if(cedula.equals("") | cedula.length()>10 | cedula.length()<10){
+                        txt_cedula.setError("Cedula incorrecta");
+                    }
                     if(nombre.equals("")){
                         txt_nombre.setError("Ingrese el nombre");
                     }
@@ -88,6 +98,7 @@ public class RegistroActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Map<String, Object> map=new HashMap<>();
+                    map.put("cedula", cedula);
                     map.put("nombre", nombre);
                     map.put("email", email);
                     map.put("password", password);

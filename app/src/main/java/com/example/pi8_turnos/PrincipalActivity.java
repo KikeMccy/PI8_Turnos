@@ -2,12 +2,15 @@ package com.example.pi8_turnos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +30,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-
+    private String nombre,email, id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         getInfoUser();
 
+
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
@@ -55,13 +59,13 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
     private void getInfoUser(){
-        String id=firebaseAuth.getCurrentUser().getUid();
+         id=firebaseAuth.getCurrentUser().getUid();
         databaseReference.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
              if(snapshot.exists()){
-                 String nombre=snapshot.child("nombre").getValue().toString();
-                 String email=snapshot.child("email").getValue().toString();
+                 nombre=snapshot.child("nombre").getValue().toString();
+                 email=snapshot.child("email").getValue().toString();
                  lb_nombre.setText(nombre);
                  lb_email.setText(email);
              }
@@ -101,5 +105,39 @@ public class PrincipalActivity extends AppCompatActivity {
     public void abrirCalendarioTurnos(View view){
         startActivity(new Intent(PrincipalActivity.this,Calendario_Activity.class));
     }
+
+    public void abririmagen(View view){
+
+        Intent intent=new Intent(PrincipalActivity.this, InstitucionesActivity.class);
+        intent.putExtra("nombre",nombre);
+        intent.putExtra("email", email);
+        intent.putExtra("id", id);
+        startActivity(intent);
+        //startActivity(new Intent(PrincipalActivity.this, InstitucionesActivity.class));
+    }
+    /*@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setMessage("Desea salir de Turno movil")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent=new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            builder.show();
+        }
+        return super.onKeyDown(keyCode, event);
+    }*/
 
 }

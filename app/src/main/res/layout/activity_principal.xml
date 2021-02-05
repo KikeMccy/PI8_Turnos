@@ -64,6 +64,7 @@
             android:layout_height="130dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
+            android:onClick="abririmagen"
             android:background="@drawable/boton_menu_principal"
             />
 

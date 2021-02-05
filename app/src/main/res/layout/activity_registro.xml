@@ -32,12 +32,20 @@
             android:gravity="bottom"
             android:orientation="vertical"
             >
+            <EditText
+                android:id="@+id/txt_cedula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:hint="Cédula"
+                android:inputType="number"
+                />
     <EditText
         android:id="@+id/txt_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:layout_marginTop="50dp"
+        android:hint="Nombres"
+        android:layout_marginTop="20dp"
         />
     <EditText
         android:id="@+id/txt_email"

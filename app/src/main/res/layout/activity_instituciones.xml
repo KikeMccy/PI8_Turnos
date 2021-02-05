@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context=".InstitucionesActivity">
+    <ScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            >
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <TextView
+              android:id="@+id/txt_buscar_foto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="70dp"
+              android:layout_marginTop="40dp"
+              android:text="Buscar imagen: "
+              android:textColor="@color/black"
+              android:textSize="18sp"
+              android:textStyle="bold" />
+
+          <Button
+        android:id="@+id/btn_seleccionar_foto"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_margin="40dp"
+        android:text="..."
+        android:background="@drawable/redondear_boton"
+        ></Button>
+            ></LinearLayout>
+            <ImageView
+
+                android:id="@+id/img_foto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:scaleType="centerInside"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:id="@+id/txt_ubicacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="15dp"
+                    android:text="ubicacion GPS       "
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_seleccionar_ubicacion"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#FFFFFF"
+
+                    android:foreground="@drawable/ubicacion"
+                    android:textColor="@color/black"></Button>
+                ></LinearLayout>
+
+
+            <EditText
+                android:id="@+id/txt_nombre_institucion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre institución"
+                android:layout_marginTop="40dp"
+                />
+    <Button
+        android:id="@+id/btn_cargar_foto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:layout_margin="10dp"
+        android:text="Registrar"
+        android:background="@drawable/redondear_boton"
+        ></Button>
+            ></LinearLayout>
+        ></ScrollView>
+
+</LinearLayout>
