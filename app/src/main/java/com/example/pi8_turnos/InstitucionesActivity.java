@@ -17,6 +17,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,6 +68,7 @@ public class InstitucionesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_instituciones);
 
         int permisionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -207,5 +209,12 @@ public class InstitucionesActivity extends AppCompatActivity {
             }
         }
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            startActivity(new Intent(InstitucionesActivity.this,PrincipalActivity.class));
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Calendario_Activity">
-
+    android:background="#ffffff"
+    tools:context=".ListInstitucionesActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/appbar_calendario"
+        android:id="@+id/appbar_buscar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -20,23 +20,22 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
         />
+
     <TextView
-        android:id="@+id/titulocalendario"
+        android:id="@+id/textView_titulo_instituciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:layout_below="@+id/appbar"
-        android:text="Asignación de Turnos"
-        android:textSize="24sp" />
+        android:layout_marginTop="50dp"
+        android:text="Seleccione una institucion: "
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold|italic" />
 
-    <CalendarView
-        android:id="@+id/calendarView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcl_listado_instituciones"
         android:layout_width="match_parent"
-        android:layout_below="@+id/titulocalendario"
-        android:layout_height="541dp"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"></CalendarView>
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#ffffff"
+        />
 </LinearLayout>

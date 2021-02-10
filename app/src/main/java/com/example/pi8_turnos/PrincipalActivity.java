@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private String nombre,email, id;
+    private ProgressDialog mDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,24 +40,22 @@ public class PrincipalActivity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-
+        mDialog=new ProgressDialog(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
+
         lb_nombre=(TextView) findViewById(R.id.txt_nombre_user);
         lb_email=(TextView) findViewById(R.id.txt_email_user);
-
+        mDialog.setMessage("Espere por favor...");
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.show();
         getInfoUser();
 
 
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        final DrawerLayout drawerLayout;
-        drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();*/
+        */
 
     }
     private void getInfoUser(){
@@ -68,6 +68,7 @@ public class PrincipalActivity extends AppCompatActivity {
                  email=snapshot.child("email").getValue().toString();
                  lb_nombre.setText(nombre);
                  lb_email.setText(email);
+                 mDialog.dismiss();
              }
             }
 
@@ -102,8 +103,13 @@ public class PrincipalActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void abrirCalendarioTurnos(View view){
-        startActivity(new Intent(PrincipalActivity.this,Calendario_Activity.class));
+    public void verinstitucionesuser(View view){
+        Intent intent=new Intent(PrincipalActivity.this, InstitucionesUserActivity.class);
+        intent.putExtra("nombre",nombre);
+        startActivity(intent);
+    }
+    public void abrirInstituciones(View view){
+        startActivity(new Intent(PrincipalActivity.this,ListInstitucionesActivity.class));
     }
 
     public void abririmagen(View view){
@@ -115,6 +121,9 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(intent);
         //startActivity(new Intent(PrincipalActivity.this, InstitucionesActivity.class));
     }
+
+
+    // BOTON ATRAS
     /*@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){
@@ -139,5 +148,11 @@ public class PrincipalActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }*/
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            startActivity(new Intent(PrincipalActivity.this,MainActivity.class));
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

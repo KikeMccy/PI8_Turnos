@@ -24,13 +24,12 @@ public class AgregarTurnosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_turnos);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_add_turnos);
+        setSupportActionBar(toolbar);
         tvHoraInicio = (TextView) findViewById(R.id.horaInicio);
         tvHoraFin = (TextView) findViewById(R.id.horaFin);
         tvFecha = (TextView) findViewById(R.id.fecha);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
-        setSupportActionBar(toolbar);
 
         String fecha=getIntent().getStringExtra("fecha");
         tvFecha.setText(fecha);

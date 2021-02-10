@@ -23,7 +23,7 @@ public class Calendario_Activity extends AppCompatActivity implements CalendarVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario_);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_calendario);
         setSupportActionBar(toolbar);
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
-        android:drawable="@drawable/tiket_turno" /> <!-- presionado -->
+        android:drawable="@drawable/ver_turnos" /> <!-- presionado -->
     <item android:state_focused="true"
-        android:drawable="@drawable/tiket_turno" /> <!-- centrado -->
-    <item android:drawable="@drawable/tiket_turno" /> <!-- Por Defecto -->
+        android:drawable="@drawable/ver_turnos" /> <!-- centrado -->
+    <item android:drawable="@drawable/ver_turnos" /> <!-- Por Defecto -->
 
 </selector>

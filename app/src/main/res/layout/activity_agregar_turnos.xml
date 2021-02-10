@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AgregarTurnosActivity">
 
-    <include
-        android:id="@+id/appbar"
-        layout="@layout/toolbarprincipal"></include>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar_add_turnos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/toolbar_redondear"
+        android:layout_marginRight="10dp"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+        />
     <TextView
         android:id="@+id/tituloAgregarTurnos"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/appbar"
         android:text="Programar Turnos"
         android:textSize="24sp" />
@@ -23,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tituloAgregarTurnos"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:hint="Ingrese titulo"/>
@@ -34,6 +46,7 @@
         android:layout_below="@+id/tituloTurnos"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
         android:hint="Ingrese cantidad de turnos"/>
 
     <EditText
@@ -43,6 +56,7 @@
         android:layout_below="@+id/cantidadTurnos"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
         android:hint="Ingrese duracion turno"/>
 
     <EditText
@@ -56,6 +70,7 @@
         android:focusable="false"
         android:maxLines="1"
         android:clickable="true"
+        android:layout_marginTop="10dp"
         android:onClick="clickHoraInicio"
         android:hint="Seleccione hora de inicio"
         android:textAlignment="viewStart"/>
@@ -68,6 +83,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:inputType="time"
+        android:layout_marginTop="10dp"
         android:focusable="false"
         android:maxLines="1"
         android:clickable="true"
@@ -85,20 +101,23 @@
         android:inputType="time"
         android:focusable="false"
         android:maxLines="1"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:textAlignment="viewStart"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:layout_below="@+id/fecha"
         android:gravity="center">
         <Button
             android:id="@+id/btnAgregarRecordatorio"
             android:text="Guardar "
+            android:background="@drawable/redondear_boton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

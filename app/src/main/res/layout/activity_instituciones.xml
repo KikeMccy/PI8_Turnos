@@ -18,6 +18,17 @@
             android:gravity="bottom"
             android:orientation="vertical"
             >
+            <TextView
+                android:id="@+id/textView_titulo_buscar_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Seleccione el logo de la institucion: "
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -28,18 +39,17 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginLeft="70dp"
-              android:layout_marginTop="40dp"
+              android:layout_marginTop="10dp"
               android:text="Buscar imagen: "
               android:textColor="@color/black"
-              android:textSize="18sp"
-              android:textStyle="bold" />
+              android:textSize="18sp" />
 
           <Button
         android:id="@+id/btn_seleccionar_foto"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:layout_margin="40dp"
+        android:layout_margin="10dp"
         android:text="..."
         android:background="@drawable/redondear_boton"
         ></Button>
@@ -52,6 +62,17 @@
                 android:gravity="center"
                 android:scaleType="centerInside"
                 />
+            <TextView
+                android:id="@+id/textView_titulo_gps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Presione para obtener ubicación"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,30 +84,39 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="70dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="0dp"
                     android:text="ubicacion GPS       "
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/btn_seleccionar_ubicacion"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="0dp"
                     android:background="#FFFFFF"
 
                     android:foreground="@drawable/ubicacion"
                     android:textColor="@color/black"></Button>
                 ></LinearLayout>
 
-
+            <TextView
+                android:id="@+id/textView_titulo_instituciones_ingresar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Ingrese el nombre de la institución: "
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
             <EditText
                 android:id="@+id/txt_nombre_institucion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre institución"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="5dp"
                 />
     <Button
         android:id="@+id/btn_cargar_foto"

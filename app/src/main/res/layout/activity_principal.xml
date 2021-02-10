@@ -8,7 +8,7 @@
     android:background="@color/white"
     tools:context=".PrincipalActivity">
 
-    <!--<androidx.appcompat.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,10 +19,7 @@
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
-        />-->
-    <include
-        android:id="@+id/appbar"
-        layout="@layout/toolbarprincipal"></include>
+        />
 
     <TextView
         android:id="@+id/txt_bienvedida"
@@ -37,7 +34,7 @@
         android:id="@+id/txt_nombre_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre de usuario"
+        android:text=""
         android:textAlignment="center"
         android:textSize="18sp"
         android:layout_marginTop="15dp"
@@ -46,11 +43,12 @@
         android:id="@+id/txt_email_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Correo electronico"
+        android:text=""
         android:layout_margin="15dp"
         android:textAlignment="center"
         android:textSize="18sp"
         />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,9 +62,8 @@
             android:layout_height="130dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
-            android:onClick="abririmagen"
             android:background="@drawable/boton_menu_principal"
-            />
+            android:onClick="abrirInstituciones" />
 
         <ImageButton
             android:id="@+id/img_btn_turnos"
@@ -74,8 +71,34 @@
             android:layout_height="130dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/boton_ver_turnos"
-            />
+            android:background="@drawable/boton_ver_turnos" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/textView_titulo_menu_instituciones"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:text="Instituciones"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+        <TextView
+            android:id="@+id/textView_titulo_menu_ver_turnos"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:text="Ver turnos"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,18 +112,46 @@
             android:layout_height="130dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
+            android:background="@drawable/boton_crear_institucion"
             android:clickable="true"
-            android:onClick="abrirCalendarioTurnos"
-            android:background="@drawable/boton_crear_institucion" />
+            android:onClick="abririmagen" />
 
-        <!--<ImageButton
+        <ImageButton
             android:id="@+id/img_btn_otros"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/boton_registar"
-            tools:srcCompat="@drawable/tiket_turno" />-->
+            android:background="@drawable/boton_add_turnos"
+            android:clickable="true"
+            android:onClick="verinstitucionesuser" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/textView_titulo_menu_add_instituciones"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:text="Añadir institución"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+        <TextView
+            android:id="@+id/textView_titulo_menu_asignar_turnos"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:text="Asignar turnos"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+
     </LinearLayout>
 
 

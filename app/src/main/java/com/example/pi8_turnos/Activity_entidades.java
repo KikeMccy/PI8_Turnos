@@ -25,10 +25,12 @@ public class Activity_entidades extends AppCompatActivity {
      FirebaseDatabase firebaseDatabase;
      DatabaseReference databaseReference;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entidades);
+
 
         nombre_cread=findViewById(R.id.txt_creador);
         nombre_ent=findViewById(R.id.txt_entidad);

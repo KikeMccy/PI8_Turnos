@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pi8_turnos">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.hardware.location.gps"/>
-
+    <uses-permission android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -14,24 +14,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PI8_Turnos">
-        <activity android:name=".InstitucionesActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".TurnosProgramadosActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".AgregarTurnosActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Calendario_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RecuperarPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ModificarUserActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".PrincipalActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".InstitucionesUserActivity"></activity>
+        <activity android:name=".ListInstitucionesActivity" />
+        <activity
+            android:name=".InstitucionesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TurnosProgramadosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AgregarTurnosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Calendario_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RecuperarPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ModificarUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PrincipalActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".SplashScreen"
+        <activity
+            android:name=".SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,15 +50,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity
+        <!--
+<activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />-->
-        <activity android:name=".Activity_entidades"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
+            android:label="@string/title_activity_login" />
+        -->
+        <activity
+            android:name=".Activity_entidades"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
