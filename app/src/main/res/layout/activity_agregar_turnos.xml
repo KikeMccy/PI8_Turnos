@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,11 +25,11 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/appbar"
+        android:layout_below="@+id/appbar_add_turnos"
         android:text="Programar Turnos"
         android:textSize="24sp" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/tituloTurnos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,32 +38,35 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:hint="Ingrese titulo"/>
+    -->
 
     <EditText
         android:id="@+id/cantidadTurnos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tituloTurnos"
+        android:layout_below="@+id/tituloAgregarTurnos"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
+        android:inputType="number"
         android:hint="Ingrese cantidad de turnos"/>
 
     <EditText
-        android:id="@+id/tiempoTurnos"
+        android:id="@+id/duracionTurnos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cantidadTurnos"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        android:hint="Ingrese duracion turno"/>
+        android:inputType="number"
+        android:hint="Ingrese duración de turno (minutos)"/>
 
     <EditText
         android:id="@+id/horaInicio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tiempoTurnos"
+        android:layout_below="@+id/duracionTurnos"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:inputType="time"
@@ -71,11 +74,11 @@
         android:maxLines="1"
         android:clickable="true"
         android:layout_marginTop="10dp"
-        android:onClick="clickHoraInicio"
+        android:onClick="clickTextView"
         android:hint="Seleccione hora de inicio"
         android:textAlignment="viewStart"/>
 
-    <EditText
+    <!--<EditText
         android:id="@+id/horaFin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,12 +93,13 @@
         android:onClick="clickHoraFin"
         android:hint="Seleccione hora de fin"
         android:textAlignment="viewStart"/>
+    -->
 
     <EditText
         android:id="@+id/fecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/horaFin"
+        android:layout_below="@+id/horaInicio"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:inputType="time"
@@ -113,11 +117,11 @@
         android:gravity="center">
         <Button
             android:id="@+id/btnAgregarRecordatorio"
-            android:text="Guardar "
+            android:text="Generar"
             android:background="@drawable/redondear_boton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:onClick="agregarTurnos"/>
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

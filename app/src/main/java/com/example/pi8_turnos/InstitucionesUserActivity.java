@@ -80,7 +80,7 @@ public class InstitucionesUserActivity extends AppCompatActivity {
                                 Intent intent = new Intent(InstitucionesUserActivity.this, Calendario_Activity.class);
                                 intent.putExtra("id_institucion", id);
                                 startActivity(intent);
-                                Toast.makeText(InstitucionesUserActivity.this,id,Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(InstitucionesUserActivity.this,id,Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

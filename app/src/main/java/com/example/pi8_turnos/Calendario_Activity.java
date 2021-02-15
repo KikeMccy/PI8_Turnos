@@ -11,11 +11,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.CalendarView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Calendario_Activity extends AppCompatActivity implements CalendarView.OnDateChangeListener {
 
     private CalendarView calendarView;
-
-    int val=0;
+    String idInstitucion="";
     String sDia="",sMes="",sAnio="";
 
     @Override
@@ -26,6 +29,8 @@ public class Calendario_Activity extends AppCompatActivity implements CalendarVi
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_calendario);
         setSupportActionBar(toolbar);
 
+        idInstitucion=getIntent().getStringExtra("id_institucion");
+
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         long a=calendarView.getDate();
         calendarView.setOnDateChangeListener(this);
@@ -34,60 +39,73 @@ public class Calendario_Activity extends AppCompatActivity implements CalendarVi
     @Override
     public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        CharSequence[] items = new CharSequence[3];
-        items[0] = "Agregar Turnos";
-        items[1] = "Ver Turnos";
-        items[2] = "Cancelar";
+        CharSequence[] items = null;//new CharSequence[3];
 
-
-        int dia,mes, anio;
-        dia=i2;
-        mes=i1+1;
-        anio=i;
-
-        sDia = Integer.toString(dia);
-        sMes = Integer.toString(mes);
-        sAnio=Integer.toString(anio);
+        //CONVERTIR A STRING LA FECHA SELECCIONADA
+        sDia = String.valueOf(i2);
+        sMes = String.valueOf(i1 + 1);
+        sAnio = String.valueOf(i);
         if (sDia.length() == 1)
             sDia = "0" + sDia;
         if (sMes.length() == 1)
             sMes = "0" + sMes;
 
-        String fecha=sAnio+"-"+sMes+"-"+sDia;
+        String fecha = sDia + "-" + sMes + "-" + sAnio;
 
-        //  int finalAuxDia = auxDia;
-        builder.setTitle("Seleccione una Actividad")
-                .setItems(items, new DialogInterface.OnClickListener() {
+        //OBTENER FECHA Y HORA ACTUAL
+        Calendar calendario = Calendar.getInstance();
+        String kdia = String.valueOf(calendario.get(Calendar.DAY_OF_MONTH));
+        String kmes = String.valueOf(calendario.get(Calendar.MONDAY) + 1);
+        String kanio = String.valueOf(calendario.get(Calendar.YEAR));
+        String khoras = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String kminutos = String.valueOf(calendario.get(Calendar.MINUTE));
+        if (kdia.length() == 1)
+            kdia = "0" + kdia;
+        if (kmes.length() == 1)
+            kmes = "0" + kmes;
+        if (khoras.length() == 1)
+            khoras = "0" + khoras;
+        if (kminutos.length() == 1)
+            kminutos = "0" + kminutos;
+        String fechaActual = kdia + "-" + kmes + "-" + kanio + " " + khoras + ":" + kminutos + ":00";
+
+        //OBTENER FECHA SELECCIONADA EN CALENDARIO
+        String fechaSeleccionada = sDia + "-" + sMes + "-" + sAnio + " " + khoras + ":" + kminutos + ":00";
+
+
+        try {
+            //DAR FORMATO A LA FECHA
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+            Date dateActual = sdf.parse(fechaActual);
+            Date dateSeleccionado = sdf.parse(fechaSeleccionada);
+
+            //COMPARAR LAS FECHAS
+            String com = String.valueOf(dateActual.compareTo(dateSeleccionado));
+
+            //SI LA FECHA ES MAYOR O IGUAL SE ABRE UN DIALOG
+            if (com.equals("-1") || com.equals("0")) {
+                items = new CharSequence[3];
+                items[0] = "Agregar Turnos";
+                items[1] = "Ver Turnos";
+                items[2] = "Cancelar";
+
+                builder.setTitle("Seleccione una Actividad");
+                builder.setCancelable(false);
+                builder.setItems(items, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0) {
-                          /*   if(finalAuxDia ==1)
-                            {}*/
-                            //int valor = getIntent().getExtras().getInt("dia");    //getStringExtra("dia");
-
-                            /*Toast toast2 =
-                                    Toast.makeText(getApplicationContext(),
-                                            fecha, Toast.LENGTH_SHORT);
-
-                            //toast2.setGravity(Gravity.CENTER|Gravity.LEFT,0,0);
-
-                            toast2.show();*/
-
-                            Intent intent=new Intent(getApplication(),AgregarTurnosActivity.class);
-                            Bundle bundle=new Bundle();
-                            bundle.putString("fecha",fecha);
-                            //bundle.putInt("mes",mes);
-                            //bundle.putInt("anio",anio);
+                            Intent intent = new Intent(getApplication(), AgregarTurnosActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("fecha", fecha);
+                            bundle.putString("id_institucion",idInstitucion);
                             intent.putExtras(bundle);
                             startActivity(intent);
 
                         } else if (i == 1) {
-                            Intent intent=new Intent(getApplication(),TurnosProgramadosActivity.class);
-                            Bundle bundle=new Bundle();
-                            bundle.putInt("dia",dia);
-                            bundle.putInt("mes",mes);
-                            bundle.putInt("anio",anio);
+                            Intent intent = new Intent(getApplication(), TurnosProgramadosActivity.class);
+                            Bundle bundle = new Bundle();
                             intent.putExtras(bundle);
                             startActivity(intent);
                         } else {
@@ -95,14 +113,47 @@ public class Calendario_Activity extends AppCompatActivity implements CalendarVi
                         }
                     }
                 });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            //CASO CONTRARIO OTRO DIALOG SIN LA OPCION DE AGREGAR RECORDATORIO
+            else {
+                items = new CharSequence[2];
+                items[0] = "Ver Turnos";
+                items[1] = "Cancelar";
 
+                builder.setTitle("Seleccione una Actividad");
+                builder.setCancelable(false);
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (i == 0) {
+                            Intent intent = new Intent(getApplication(), TurnosProgramadosActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("fecha", fecha);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+
+                        } else {
+                            return;
+                        }
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal,menu);
         return super.onCreateOptionsMenu(menu);
+    }*/
     }
-
 }
