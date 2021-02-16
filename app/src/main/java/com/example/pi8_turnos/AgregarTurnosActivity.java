@@ -1,5 +1,6 @@
 package com.example.pi8_turnos;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -14,8 +15,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.pi8_turnos.Model.PreTurnos;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,13 +29,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.firebase.database.FirebaseDatabase.getInstance;
+
 public class AgregarTurnosActivity extends AppCompatActivity {
+    FirebaseAuth firebaseAuth;
     DatabaseReference mDataBase;
     String hour = "";
     String minute = "";
     String fecha = "";
-    String idInstitucion="";
+    String idInstitucion = "";
     private int horas, minutos;
+    //String idUsuario = "";
     String dia = "", mes = "", anio = "", horasD = "", minutosD = "";
     TextView tvCantidadTurnos, tvDuracionTurnos, tvHoraInicio, tvFecha, tvTurnosGenerados;
 
@@ -39,6 +48,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_turnos);
 
+        firebaseAuth=FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_add_turnos);
@@ -50,7 +60,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
         tvHoraInicio = (TextView) findViewById(R.id.horaInicio);
         tvFecha = (TextView) findViewById(R.id.fecha);
 
-        idInstitucion=getIntent().getStringExtra("id_institucion");
+        idInstitucion = getIntent().getStringExtra("id_institucion");
         fecha = getIntent().getStringExtra("fecha");
         tvFecha.setText(fecha);
 
@@ -64,12 +74,16 @@ public class AgregarTurnosActivity extends AppCompatActivity {
 
     public void clickTextView(View view) {
         final Calendar c = Calendar.getInstance();
-        if (hour != "") {
-            horas = Integer.parseInt(hour);
-            minutos = Integer.parseInt(minute);
-        } else {
+        if (hour.equals("")) {
             horas = c.get(Calendar.HOUR);
             minutos = c.get(Calendar.MINUTE);
+            int am_pm = c.get(Calendar.AM_PM);
+            if(am_pm==1)
+                horas=horas+12;
+            //Toast toast = Toast.makeText(getApplicationContext(), String.valueOf(am_pm), Toast.LENGTH_SHORT);
+        } else {
+            horas = Integer.parseInt(hour);
+            minutos = Integer.parseInt(minute);
         }
 
         TimePickerDialog ingresarHoraInicio = new TimePickerDialog(AgregarTurnosActivity.this,
@@ -87,7 +101,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
                 },
                 horas,
                 minutos,
-                true);
+                false);
         ingresarHoraInicio.setTitle("Seleccione hora de inicio");
         ingresarHoraInicio.show();
     }
@@ -99,7 +113,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
             String hora = tvHoraInicio.getText().toString();
 
             if (cantidadTurnos > 0 && duracionTurnos > 0 && hora.length() > 0) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
                 String dateInString = fecha + " " + hora + ":00";
                 Date date = sdf.parse(dateInString);
 
@@ -128,7 +142,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
                 mBuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ingresarTurnos(horasD + ":" + minutosD, horasD + ":" + minutosD);
+                        ingresarTurnos();
                         dialogInterface.dismiss();
                     }
                 });
@@ -157,12 +171,27 @@ public class AgregarTurnosActivity extends AppCompatActivity {
         }
     }
 
-    public void ingresarTurnos(String horaInicio, String horaFin) {
-
+    public void ingresarTurnos() {
         String id = mDataBase.child("posts").push().getKey();
+        mDataBase.child("Instituciones").child(idInstitucion).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String us = snapshot.child("idusuario").getValue().toString();
+                    Toast.makeText(AgregarTurnosActivity.this,us,Toast.LENGTH_SHORT).show();
+                    mDataBase.child("Turnos").child(id).child("id_usuario").setValue(us);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         mDataBase.child("Turnos").child(id).child("fecha").setValue(fecha);
         mDataBase.child("Turnos").child(id).child("id_institucion").setValue(idInstitucion);
+
 
         try {
             int cantidadTurnos = Integer.valueOf(tvCantidadTurnos.getText().toString());
