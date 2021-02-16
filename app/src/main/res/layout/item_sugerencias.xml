@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="10dp"
-    android:layout_marginTop="10dp"
     android:background="#ffffff">
 
     <androidx.cardview.widget.CardView
@@ -20,57 +18,69 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
             android:orientation="vertical"
-            android:gravity="center"
             >
 
-            <ImageView
-                android:id="@+id/imgPortada"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/uteq"
-                android:layout_marginTop="20dp"
-                app:layout_constraintDimensionRatio="H,16:9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
-                android:id="@+id/txtNombre"
+                android:id="@+id/txt_usurio_commet_val"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imgPortada"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="Universidad Tecnica Estatal de Quevedo"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:text="Nombre de usuario"
+                android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/imgPortada" />
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <RatingBar
+                android:id="@+id/ratingBar_commet_val"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:clickable="false"
+                android:numStars="5" />
 
             <TextView
-                android:id="@+id/txt_usuario_item"
+                android:id="@+id/txt_fecha_commet_val"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtNombre"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="Jorge Saa"
+                android:layout_marginTop="5dp"
+                android:text="Fecha"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#8A000000" />
+            ></LinearLayout>
 
-            <ImageView
-                android:id="@+id/img_ubicacion_institucion"
+
+
+
+            <TextView
+                android:id="@+id/txt_commet_val"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:clickable="true"
-                android:contentDescription="Email reestablecer"
-                android:gravity="center"
-                android:scaleType="centerInside"
-                android:src="@drawable/ubicacion" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtNombre"
+                android:layout_marginTop="5dp"
+                android:text="Comentario..."
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="#8A000000" />
             <!--
                         <Button
                             android:id="@+id/arrowBtn"

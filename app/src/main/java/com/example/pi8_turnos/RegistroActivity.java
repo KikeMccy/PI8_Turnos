@@ -49,10 +49,10 @@ public class RegistroActivity extends AppCompatActivity {
         button_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cedula=txt_cedula.getText().toString();
-                nombre=txt_nombre.getText().toString();
-                email=txt_email.getText().toString();
-                password=txt_password.getText().toString();
+                cedula=txt_cedula.getText().toString().trim();
+                nombre=txt_nombre.getText().toString().trim();
+                email=txt_email.getText().toString().trim();
+                password=txt_password.getText().toString().trim();
 
                 if(!nombre.isEmpty() && !email.isEmpty() && !password.isEmpty() && !cedula.isEmpty()){
                     if (cedula.length()==10){

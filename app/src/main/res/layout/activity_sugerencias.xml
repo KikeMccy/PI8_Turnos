@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:id="@+id/drawer_layout_sugerencias"
+    tools:context=".SugerenciasActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/appbar_sugerencias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/toolbar_redondear"
+            android:layout_marginRight="10dp"
+            android:elevation="4dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center"
+        android:text="VALORACIÓN DE LA APP"
+        android:textColor="@color/black"
+        android:textSize="24sp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:text="Puntuar y escribir reseña"
+        android:textColor="@color/black"
+        android:textSize="15sp"></TextView>
+
+    <RatingBar
+        android:id="@+id/ratingBar_valoracion"
+        style="@style/Widget.AppCompat.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        android:numStars="5"
+        android:rating="0"
+        android:layout_marginTop="20dp"
+        tools:layout_editor_absoluteX="90dp"
+        tools:layout_editor_absoluteY="123dp" />
+    <TextView
+        android:id="@+id/txt_valoracion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        ></TextView>
+
+
+    <EditText
+        android:id="@+id/txt_comentario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Describe tu experiencia..."
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:inputType="textMultiLine"></EditText>
+    <Button
+        android:id="@+id/btn_comentar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/redondear_boton"
+        android:text="Comentar"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Puntuaciones y opiniones:"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:textSize="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        ></TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcl_sugerencias"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"/>
+        ></LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

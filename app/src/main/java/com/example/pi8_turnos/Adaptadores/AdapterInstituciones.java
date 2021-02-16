@@ -19,9 +19,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 import java.util.ArrayList;
 
-public class AdapterInstituciones extends FirebaseRecyclerAdapter<Institucion,AdapterInstituciones.myviewholder> {
+public class AdapterInstituciones /*extends FirebaseRecyclerAdapter<Institucion,AdapterInstituciones.myviewholder>*/ {
 
-    public AdapterInstituciones(@NonNull FirebaseRecyclerOptions<Institucion> options) {
+   /* public AdapterInstituciones(@NonNull FirebaseRecyclerOptions<Institucion> options) {
         super(options);
     }
 
@@ -58,6 +58,6 @@ public class AdapterInstituciones extends FirebaseRecyclerAdapter<Institucion,Ad
             nombreusuario=(TextView)itemView.findViewById(R.id.txt_usuario_item);
 
         }
-    }
+    }*/
 
 }

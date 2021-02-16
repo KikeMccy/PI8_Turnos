@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.ProgressDialog;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,14 +27,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class PrincipalActivity extends AppCompatActivity {
+public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     private TextView lb_nombre,lb_email;
-
+    DrawerLayout drawerLayout;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private String nombre,email, id;
     private ProgressDialog mDialog;
+    private NavigationView navView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +47,18 @@ public class PrincipalActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 
-        lb_nombre=(TextView) findViewById(R.id.txt_nombre_user);
-        lb_email=(TextView) findViewById(R.id.txt_email_user);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icono_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navView = (NavigationView)findViewById(R.id.nav_view);
+        navView.setNavigationItemSelectedListener(this);
+        navView.setItemIconTintList(null);
+        navView.setCheckedItem(R.id.item_sugerencias);
+
+        //lb_nombre=(TextView) findViewById(R.id.txt_nombre_user);
+        //lb_email=(TextView) findViewById(R.id.txt_email_user);
+
+
+
         mDialog.setMessage("Espere por favor...");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
@@ -66,8 +79,11 @@ public class PrincipalActivity extends AppCompatActivity {
              if(snapshot.exists()){
                  nombre=snapshot.child("nombre").getValue().toString();
                  email=snapshot.child("email").getValue().toString();
-                 lb_nombre.setText(nombre);
-                 lb_email.setText(email);
+                 //lb_nombre.setText(nombre);
+                 //lb_email.setText(email);
+                 View header = ((NavigationView)findViewById(R.id.nav_view)).getHeaderView(0);
+                 ((TextView) header.findViewById(R.id.txt_nav_usuario)).setText(nombre);
+                 ((TextView) header.findViewById(R.id.txt_nav_correo)).setText(email);
                  mDialog.dismiss();
              }
             }
@@ -89,6 +105,10 @@ public class PrincipalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()){
+            case android.R.id.home:
+                drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
             case R.id.opc_cerrar_sesion:{
                 firebaseAuth.signOut();
                 startActivity(new Intent(PrincipalActivity.this,MainActivity.class));
@@ -154,5 +174,21 @@ public class PrincipalActivity extends AppCompatActivity {
             startActivity(new Intent(PrincipalActivity.this,MainActivity.class));
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_sugerencias:
+                Intent intent=new Intent(PrincipalActivity.this, SugerenciasActivity.class);
+                intent.putExtra("nombre",nombre);
+                startActivity(intent);
+                break;
+            case R.id.item_informacion:
+                startActivity(new Intent(PrincipalActivity.this,AboutActivity.class));
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

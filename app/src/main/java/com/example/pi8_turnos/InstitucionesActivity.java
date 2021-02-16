@@ -179,7 +179,7 @@ public class InstitucionesActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
                                 Uri downloaduri= task.getResult();
-                                String nombre_ins=txt_nombre.getText().toString();
+                                String nombre_ins=txt_nombre.getText().toString().trim();
                                 Map<String, Object> map=new HashMap<>();
                                 map.put("idusuario", id_user);
                                 map.put("nombreusuario",nombre);
