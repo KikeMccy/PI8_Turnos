@@ -41,7 +41,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
     private int horas, minutos;
     //String idUsuario = "";
     String dia = "", mes = "", anio = "", horasD = "", minutosD = "";
-    TextView tvCantidadTurnos, tvDuracionTurnos, tvHoraInicio, tvFecha, tvTurnosGenerados;
+    TextView tvDescripcionTurnos,tvCantidadTurnos, tvDuracionTurnos, tvHoraInicio, tvFecha, tvTurnosGenerados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //INICIAR VARIABLES TEXT VIEW
+        tvDescripcionTurnos= (TextView) findViewById(R.id.descripcionTurnos);
         tvCantidadTurnos = (TextView) findViewById(R.id.cantidadTurnos);
         tvDuracionTurnos = (TextView) findViewById(R.id.duracionTurnos);
         tvHoraInicio = (TextView) findViewById(R.id.horaInicio);
@@ -112,7 +113,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
             int duracionTurnos = Integer.valueOf(tvDuracionTurnos.getText().toString());
             String hora = tvHoraInicio.getText().toString();
 
-            if (cantidadTurnos > 0 && duracionTurnos > 0 && hora.length() > 0) {
+            if (tvDescripcionTurnos.getText().toString().length()>0 && cantidadTurnos > 0 && duracionTurnos > 0 && hora.length() > 0) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
                 String dateInString = fecha + " " + hora + ":00";
                 Date date = sdf.parse(dateInString);
@@ -191,6 +192,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
 
         mDataBase.child("Turnos").child(id).child("fecha").setValue(fecha);
         mDataBase.child("Turnos").child(id).child("id_institucion").setValue(idInstitucion);
+        mDataBase.child("Turnos").child(id).child("descripcion").setValue(tvDescripcionTurnos.getText().toString());
 
 
         try {
