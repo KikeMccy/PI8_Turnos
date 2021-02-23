@@ -9,11 +9,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.CalendarView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import sun.bob.mcalendarview.MCalendarView;
 
 public class Calendario_Activity extends AppCompatActivity implements CalendarView.OnDateChangeListener {
 
@@ -32,9 +36,13 @@ public class Calendario_Activity extends AppCompatActivity implements CalendarVi
         idInstitucion=getIntent().getStringExtra("id_institucion");
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
-        long a=calendarView.getDate();
+       // long a=calendarView.getDate();
         calendarView.setOnDateChangeListener(this);
+
+        //MCalendarView mCalendarView = (MCalendarView) findViewById(R.id.calendar);
+        //mCalendarView.setOnDateClickListener(n);
     }
+
 
     @Override
     public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
@@ -106,6 +114,8 @@ public class Calendario_Activity extends AppCompatActivity implements CalendarVi
                         } else if (i == 1) {
                             Intent intent = new Intent(getApplication(), TurnosProgramadosActivity.class);
                             Bundle bundle = new Bundle();
+                            bundle.putString("fecha", fecha);
+                            bundle.putString("id_institucion",idInstitucion);
                             intent.putExtras(bundle);
                             startActivity(intent);
                         } else {
@@ -148,12 +158,15 @@ public class Calendario_Activity extends AppCompatActivity implements CalendarVi
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-/*
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_principal,menu);
-        return super.onCreateOptionsMenu(menu);
-    }*/
+    protected void onStart() {
+        super.onStart();
+        /*MCalendarView calendarView = (MCalendarView) findViewById(R.id.calendar);
+        calendarView.markDate(2021, 2, 23);
+        calendarView.markDate(2021, 2, 27);
+        calendarView.markDate(2021, 2, 25);*/
     }
 }

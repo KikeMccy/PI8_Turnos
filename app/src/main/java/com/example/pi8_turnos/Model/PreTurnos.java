@@ -1,37 +1,41 @@
 package com.example.pi8_turnos.Model;
 
 public class PreTurnos {
-    int numero;
-    String horaInicio;
-    String horaFin;
+    String estado;
+    String hora_inicio;
+    String hora_fin;
 
-    public PreTurnos(int numero, String horaInicio, String horaFin) {
-        this.numero = numero;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+    public  PreTurnos(){
+
     }
 
-    public int getNumero() {
-        return numero;
+    public PreTurnos(String estado, String hora_inicio, String hora_fin) {
+        this.estado = estado;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public String getEstado() {
+        return estado;
     }
 
-    public String getHoraInicio() {
-        return horaInicio;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public void setHoraInicio(String horaInicio) {
-        this.horaInicio = horaInicio;
+    public String getHora_inicio() {
+        return hora_inicio;
     }
 
-    public String getHoraFin() {
-        return horaFin;
+    public void setHora_inicio(String hora_inicio) {
+        this.hora_inicio = hora_inicio;
     }
 
-    public void setHoraFin(String horaFin) {
-        this.horaFin = horaFin;
+    public String getHora_fin() {
+        return hora_fin;
+    }
+
+    public void setHora_fin(String hora_fin) {
+        this.hora_fin = hora_fin;
     }
 }

@@ -39,4 +39,22 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"></CalendarView>
 
+
+
+   <!-- <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@+id/titulocalendario"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"></CalendarView>
+
+    <sun.bob.mcalendarview.MCalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="443dp"
+        android:layout_below="@+id/calendarView"
+        tools:context=".Calendario_Activity" />-->
+
 </LinearLayout>

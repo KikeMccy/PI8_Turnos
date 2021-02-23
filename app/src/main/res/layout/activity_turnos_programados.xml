@@ -6,13 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".TurnosProgramadosActivity">
 
-
+   <!-- <include
+        android:id="@+id/toolbar"
+        layout="@layout/"></include> -->
     <TextView
-        android:id="@+id/tvTituloNuevo"
+        android:id="@+id/tvTituloTurnosProgramados"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
         android:layout_below="@+id/appbar"
         android:text="Turnos Programados"
         android:textSize="24sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcl_turnosCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvTituloTurnosProgramados"
+        tools:layout_editor_absoluteX="89dp"
+        tools:layout_editor_absoluteY="121dp" />
+
 </RelativeLayout>
