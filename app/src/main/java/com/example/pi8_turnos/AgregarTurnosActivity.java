@@ -68,19 +68,13 @@ public class AgregarTurnosActivity extends AppCompatActivity {
         idInstitucion = getIntent().getStringExtra("id_institucion");
         fecha = getIntent().getStringExtra("fecha");
         tvFecha.setText(fecha);
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     public void agregarEntretiempo(View view) {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(AgregarTurnosActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_entretiempo, null);
-        mBuilder.setTitle("Enter data");
+        mBuilder.setTitle("Ingrese datos");
         mBuilder.setCancelable(false);
         TextView inicioEntretiempo = (TextView) mView.findViewById(R.id.inicioEntretiempo);
         TextView finEntretiempo = (TextView) mView.findViewById(R.id.finEntretiempo);
@@ -90,9 +84,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
                 if (horasInicioEntretiempo.length() > 0 && horasFinEntretiempo.length() > 0) {
                     tvEntretiempo.setText(horasInicioEntretiempo + ":" + minutosInicioEntretiempo + " - " + horasFinEntretiempo + ":" + minutosFinEntretiempo);
                     dialogInterface.dismiss();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(mView.getContext(), "Enter values", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -220,10 +212,22 @@ public class AgregarTurnosActivity extends AppCompatActivity {
                 String dateInString = fecha + " " + hora + ":00";
                 Date date = sdf.parse(dateInString);
 
+                Date dateInicioEntretiempo=null;
+                Date dateFinEntretiempo=null;
+                if (horasInicioEntretiempo.length() > 0) {
+                    String fecha1 = fecha + " " + horasInicioEntretiempo +":"+ minutosInicioEntretiempo +":"+ "00";
+                    dateInicioEntretiempo = sdf.parse(fecha1);
+
+                    String fecha2 = fecha + " " + horasFinEntretiempo +":"+ minutosFinEntretiempo +":"+ "00";
+                    dateFinEntretiempo = sdf.parse(fecha2);
+                }
+
                 //INICIAR VARIABLES DEL ALERT DIALOG
                 AlertDialog.Builder mBuilder = null;
                 View mView = null;
                 String content = "";
+
+                boolean est=true;
                 for (int i = 0; i < cantidadTurnos; i++) {
 
                     descomponerDate(date);
@@ -231,13 +235,33 @@ public class AgregarTurnosActivity extends AppCompatActivity {
                     date = sumarRestarHorasFecha(date, duracionTurnos);
                     descomponerDate(date);
 
-
                     mBuilder = new AlertDialog.Builder(AgregarTurnosActivity.this);
                     mView = getLayoutInflater().inflate(R.layout.lista_creacion_turnos, null);
                     mBuilder.setTitle("¿Desea agregar los turnos?");
 
                     tvTurnosGenerados = (TextView) mView.findViewById(R.id.turnosGenerados);
 
+
+                    if (horasInicioEntretiempo.length() > 0) {
+                        String com = String.valueOf(date.compareTo(dateInicioEntretiempo));
+                        if (com.equals("1")) {
+
+                            if(est) {
+                                content +=""+"\n";
+                                date = dateFinEntretiempo;
+                                descomponerDate(date);
+                                auxHora = horasD + ":" + minutosD;
+                                date = sumarRestarHorasFecha(date, duracionTurnos);
+                                descomponerDate(date);
+                                est=false;
+                            }
+                        } else
+                        {
+                            /*Toast toast = Toast.makeText(getApplicationContext(), "Menor", Toast.LENGTH_SHORT);
+                            toast.show();
+                            content +="menor"+"\n";*/
+                        }
+                    }
                     content += "Turno " + (i + 1) + ": " + auxHora + "-" + horasD + ":" + minutosD + "\n";
                     tvTurnosGenerados.append(content);
 
@@ -296,29 +320,56 @@ public class AgregarTurnosActivity extends AppCompatActivity {
         mDataBase.child("Turnos").child(id).child("id_institucion").setValue(idInstitucion);
         mDataBase.child("Turnos").child(id).child("descripcion").setValue(tvDescripcionTurnos.getText().toString());
 
-
         try {
             int cantidadTurnos = Integer.valueOf(tvCantidadTurnos.getText().toString());
             int duracionTurnos = Integer.valueOf(tvDuracionTurnos.getText().toString());
             String hora = tvHoraInicio.getText().toString();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
             String dateInString = fecha + " " + hora + ":00";
             Date date = sdf.parse(dateInString);
 
+            Date dateInicioEntretiempo=null;
+            Date dateFinEntretiempo=null;
+            if (horasInicioEntretiempo.length() > 0) {
+                String fecha1 = fecha + " " + horasInicioEntretiempo +":"+ minutosInicioEntretiempo +":"+ "00";
+                dateInicioEntretiempo = sdf.parse(fecha1);
+
+                String fecha2 = fecha + " " + horasFinEntretiempo +":"+ minutosFinEntretiempo +":"+ "00";
+                dateFinEntretiempo = sdf.parse(fecha2);
+            }
+
+            boolean est=true;
             for (int i = 0; i < cantidadTurnos; i++) {
                 descomponerDate(date);
                 String auxHora = horasD + ":" + minutosD;
                 date = sumarRestarHorasFecha(date, duracionTurnos);
                 descomponerDate(date);
 
+
+                if (horasInicioEntretiempo.length() > 0) {
+                    String com = String.valueOf(date.compareTo(dateInicioEntretiempo));
+                    if (com.equals("1")) {
+                        if(est) {
+                            //content +=""+"\n";
+                            date = dateFinEntretiempo;
+                            descomponerDate(date);
+                            auxHora = horasD + ":" + minutosD;
+                            date = sumarRestarHorasFecha(date, duracionTurnos);
+                            descomponerDate(date);
+                            est=false;
+                        }
+                    }
+                }
+
                 Map<String, Object> turnosHorario = new HashMap<>();
                 turnosHorario.put("estado", "libre");
                 turnosHorario.put("hora_inicio", auxHora);
                 turnosHorario.put("hora_fin", horasD + ":" + minutosD);
                 turnosHorario.put("nombre_usuario", "ninguno");
-                turnosHorario.put("numero", String.valueOf(i+1));
+                turnosHorario.put("numero", String.valueOf(i + 1));
 
                 mDataBase.child("Turnos").child(id).child("horario").push().setValue(turnosHorario);
+
             }
             //mDataBase.child("turnos").child("horario").push().setValue(turnosMap);
 
@@ -327,6 +378,8 @@ public class AgregarTurnosActivity extends AppCompatActivity {
             toast.show();
             super.onBackPressed();
         } catch (Exception e) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Error al guardar", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 
@@ -363,5 +416,11 @@ public class AgregarTurnosActivity extends AppCompatActivity {
         calendar.setTime(fecha); // Configuramos la fecha que se recibe
         calendar.add(Calendar.MINUTE, minutos);  // numero de horas a añadir, o restar en caso de horas<0
         return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
