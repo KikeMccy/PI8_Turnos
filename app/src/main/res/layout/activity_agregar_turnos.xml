@@ -120,11 +120,29 @@
         android:clickable="true"
         android:textAlignment="viewStart"/>
 
+
+
+    <EditText
+        android:id="@+id/entretiempo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fecha"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:inputType="time"
+        android:focusable="false"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:onClick="agregarEntretiempo"
+        android:hint="Entretiempo (opcional)"
+        android:textAlignment="viewStart"/>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:layout_below="@+id/fecha"
+        android:layout_below="@+id/entretiempo"
         android:gravity="center">
         <Button
             android:id="@+id/btnAgregarRecordatorio"

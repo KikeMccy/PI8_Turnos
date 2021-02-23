@@ -39,27 +39,31 @@ public class AgregarTurnosActivity extends AppCompatActivity {
     String fecha = "";
     String idInstitucion = "";
     private int horas, minutos;
-    //String idUsuario = "";
+    String horasInicioEntretiempo = "", minutosInicioEntretiempo = "";
+    String horasFinEntretiempo = "", minutosFinEntretiempo = "";
+    private int horasEntretiempo1, minutosEntretiempo1;
+    private int horasEntretiempo2, minutosEntretiempo2;
     String dia = "", mes = "", anio = "", horasD = "", minutosD = "";
-    TextView tvDescripcionTurnos,tvCantidadTurnos, tvDuracionTurnos, tvHoraInicio, tvFecha, tvTurnosGenerados;
+    TextView tvDescripcionTurnos, tvCantidadTurnos, tvDuracionTurnos, tvHoraInicio, tvFecha, tvEntretiempo, tvTurnosGenerados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_turnos);
 
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_add_turnos);
         setSupportActionBar(toolbar);
 
         //INICIAR VARIABLES TEXT VIEW
-        tvDescripcionTurnos= (TextView) findViewById(R.id.descripcionTurnos);
+        tvDescripcionTurnos = (TextView) findViewById(R.id.descripcionTurnos);
         tvCantidadTurnos = (TextView) findViewById(R.id.cantidadTurnos);
         tvDuracionTurnos = (TextView) findViewById(R.id.duracionTurnos);
         tvHoraInicio = (TextView) findViewById(R.id.horaInicio);
         tvFecha = (TextView) findViewById(R.id.fecha);
+        tvEntretiempo = (TextView) findViewById(R.id.entretiempo);
 
         idInstitucion = getIntent().getStringExtra("id_institucion");
         fecha = getIntent().getStringExtra("fecha");
@@ -73,14 +77,112 @@ public class AgregarTurnosActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void agregarEntretiempo(View view) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(AgregarTurnosActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_entretiempo, null);
+        mBuilder.setTitle("Enter data");
+        mBuilder.setCancelable(false);
+        TextView inicioEntretiempo = (TextView) mView.findViewById(R.id.inicioEntretiempo);
+        TextView finEntretiempo = (TextView) mView.findViewById(R.id.finEntretiempo);
+        mBuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (horasInicioEntretiempo.length() > 0 && horasFinEntretiempo.length() > 0) {
+                    tvEntretiempo.setText(horasInicioEntretiempo + ":" + minutosInicioEntretiempo + " - " + horasFinEntretiempo + ":" + minutosFinEntretiempo);
+                    dialogInterface.dismiss();
+                }
+                else
+                {
+                    Toast.makeText(mView.getContext(), "Enter values", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        mBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        mBuilder.setView(mView);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        if (!horasInicioEntretiempo.equals("")) {
+            horasEntretiempo1 = Integer.valueOf(horasInicioEntretiempo);
+            minutosEntretiempo1 = Integer.valueOf(minutosInicioEntretiempo);
+            inicioEntretiempo.setText(horasInicioEntretiempo + ":" + minutosInicioEntretiempo);
+        }
+
+
+        if (!horasFinEntretiempo.equals("")) {
+            horasEntretiempo2 = Integer.valueOf(horasFinEntretiempo);
+            minutosEntretiempo2 = Integer.valueOf(minutosFinEntretiempo);
+            finEntretiempo.setText(horasFinEntretiempo + ":" + minutosFinEntretiempo);
+        }
+
+        // Toast toast = Toast.makeText(getApplicationContext(), "MO", Toast.LENGTH_SHORT);
+        inicioEntretiempo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast toast = Toast.makeText(getApplicationContext(), "Ingrese datos correctamente", Toast.LENGTH_SHORT);
+                if (!horasInicioEntretiempo.equals("")) {
+                    horasEntretiempo1 = Integer.valueOf(horasInicioEntretiempo);
+                    minutosEntretiempo1 = Integer.valueOf(minutosInicioEntretiempo);
+                }
+                TimePickerDialog ingresarHoraInicio = new TimePickerDialog(AgregarTurnosActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        //Toast toast = Toast.makeText(getApplicationContext(), String.valueOf(i), Toast.LENGTH_SHORT);
+                        horasInicioEntretiempo = Integer.toString(i);
+                        minutosInicioEntretiempo = Integer.toString(i1);
+                        if (horasInicioEntretiempo.length() == 1)
+                            horasInicioEntretiempo = "0" + horasInicioEntretiempo;
+                        if (minutosInicioEntretiempo.length() == 1)
+                            minutosInicioEntretiempo = "0" + minutosInicioEntretiempo;
+                        inicioEntretiempo.setText(horasInicioEntretiempo + ":" + minutosInicioEntretiempo);
+                    }
+                }, horasEntretiempo1, minutosEntretiempo1, false);
+                ingresarHoraInicio.setTitle("Seleccione hora de inicio");
+                ingresarHoraInicio.show();
+            }
+        });
+
+        finEntretiempo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!horasFinEntretiempo.equals("")) {
+                    horasEntretiempo2 = Integer.valueOf(horasFinEntretiempo);
+                    minutosEntretiempo2 = Integer.valueOf(minutosFinEntretiempo);
+                }
+                TimePickerDialog ingresarHoraInicio = new TimePickerDialog(AgregarTurnosActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        horasFinEntretiempo = Integer.toString(i);
+                        minutosFinEntretiempo = Integer.toString(i1);
+                        if (horasFinEntretiempo.length() == 1)
+                            horasFinEntretiempo = "0" + horasFinEntretiempo;
+                        if (minutosFinEntretiempo.length() == 1)
+                            minutosFinEntretiempo = "0" + minutosFinEntretiempo;
+                        finEntretiempo.setText(horasFinEntretiempo + ":" + minutosFinEntretiempo);
+
+                    }
+                },
+                        horasEntretiempo2, minutosEntretiempo2, false);
+                ingresarHoraInicio.setTitle("Seleccione hora de inicio");
+                ingresarHoraInicio.show();
+            }
+        });
+    }
+
+
     public void clickTextView(View view) {
         final Calendar c = Calendar.getInstance();
         if (hour.equals("")) {
             horas = c.get(Calendar.HOUR);
             minutos = c.get(Calendar.MINUTE);
             int am_pm = c.get(Calendar.AM_PM);
-            if(am_pm==1)
-                horas=horas+12;
+            if (am_pm == 1)
+                horas = horas + 12;
             //Toast toast = Toast.makeText(getApplicationContext(), String.valueOf(am_pm), Toast.LENGTH_SHORT);
         } else {
             horas = Integer.parseInt(hour);
@@ -113,7 +215,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
             int duracionTurnos = Integer.valueOf(tvDuracionTurnos.getText().toString());
             String hora = tvHoraInicio.getText().toString();
 
-            if (tvDescripcionTurnos.getText().toString().length()>0 && cantidadTurnos > 0 && duracionTurnos > 0 && hora.length() > 0) {
+            if (tvDescripcionTurnos.getText().toString().length() > 0 && cantidadTurnos > 0 && duracionTurnos > 0 && hora.length() > 0) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
                 String dateInString = fecha + " " + hora + ":00";
                 Date date = sdf.parse(dateInString);
@@ -179,7 +281,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     String us = snapshot.child("idusuario").getValue().toString();
-                    Toast.makeText(AgregarTurnosActivity.this,us,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarTurnosActivity.this, us, Toast.LENGTH_SHORT).show();
                     mDataBase.child("Turnos").child(id).child("id_usuario").setValue(us);
                 }
             }
@@ -213,6 +315,8 @@ public class AgregarTurnosActivity extends AppCompatActivity {
                 turnosHorario.put("estado", "libre");
                 turnosHorario.put("hora_inicio", auxHora);
                 turnosHorario.put("hora_fin", horasD + ":" + minutosD);
+                turnosHorario.put("nombre_usuario", "vacio");
+                turnosHorario.put("numero", String.valueOf(i+1));
 
                 mDataBase.child("Turnos").child(id).child("horario").push().setValue(turnosHorario);
             }

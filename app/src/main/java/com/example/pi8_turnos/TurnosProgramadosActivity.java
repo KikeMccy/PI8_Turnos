@@ -84,6 +84,8 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                             holder.estadoTurno.setText(model.getEstado());
                                             holder.horaInicioTurno.setText("Inicio: "+model.getHora_inicio());
                                             holder.horaFinTurno.setText("Fin: "+model.getHora_fin());
+                                            holder.nombreTurno.setText(model.getNombre_usuario());
+                                            holder.numeroTurno.setText("Turno Número: "+model.getNumero());
                                             holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
@@ -173,7 +175,7 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
     }
 
     class myviewholder extends RecyclerView.ViewHolder {
-        TextView horaInicioTurno, horaFinTurno, estadoTurno;
+        TextView horaInicioTurno, horaFinTurno, estadoTurno,nombreTurno,numeroTurno;
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -181,6 +183,8 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
             estadoTurno = (TextView) itemView.findViewById(R.id.rvTituloDescripcionTurno);
             horaInicioTurno = (TextView) itemView.findViewById(R.id.rvHoraInicioTurno);
             horaFinTurno=(TextView) itemView.findViewById(R.id.rvHoraFinTurno);
+            nombreTurno=(TextView) itemView.findViewById(R.id.rvNombreTurno);
+            numeroTurno=(TextView) itemView.findViewById(R.id.rvNumeroTurno);
             //estadoRecordatorio=(TextView) itemView.findViewById(R.id.rvEstadoListaRecordatorios);*/
         }
     }

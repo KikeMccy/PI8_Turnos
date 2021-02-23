@@ -60,6 +60,27 @@
                     android:text="Hora Fin"
                     android:textColor="#8A000000" />
 
+            <TextView
+                android:id="@+id/rvNumeroTurno"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="Numero"
+                android:textColor="#8A000000" />
+
+            <TextView
+                android:id="@+id/rvNombreTurno"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="Usuario"
+                android:textColor="#8A000000" />
+
+
            <!-- </LinearLayout>-->
             <!--<TextView
                 android:id="@+id/rvFechaListaRecordatorios"
