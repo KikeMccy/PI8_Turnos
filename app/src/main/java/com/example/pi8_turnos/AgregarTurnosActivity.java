@@ -315,7 +315,7 @@ public class AgregarTurnosActivity extends AppCompatActivity {
                 turnosHorario.put("estado", "libre");
                 turnosHorario.put("hora_inicio", auxHora);
                 turnosHorario.put("hora_fin", horasD + ":" + minutosD);
-                turnosHorario.put("nombre_usuario", "vacio");
+                turnosHorario.put("nombre_usuario", "ninguno");
                 turnosHorario.put("numero", String.valueOf(i+1));
 
                 mDataBase.child("Turnos").child(id).child("horario").push().setValue(turnosHorario);
