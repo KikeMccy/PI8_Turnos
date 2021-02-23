@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PI8_Turnos">
-        <activity android:name=".TurnosInstitucionesActivity"></activity>
+        <activity android:name=".MisTurnosActivity"></activity>
+        <activity android:name=".ListadoTurnosActivity" />
+        <activity android:name=".TurnosInstitucionesActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".SugerenciasActivity" />
         <!--
@@ -89,6 +91,12 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+        <service android:name=".Clases.FirebaseMessaging"
+            android:exported="false">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+        </intent-filter>
+            ></service>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#D4F9E8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,6 +32,7 @@
                 android:layout_height="100dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/uteq"
+                android:layout_marginTop="10dp"
                 app:layout_constraintDimensionRatio="H,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,32 +49,7 @@
                 android:text="Universidad Tecnica Estatal de Quevedo"
                 app:layout_constraintTop_toBottomOf="@+id/imgPortada" />
 
-            <TextView
-                android:id="@+id/txt_usuario_item_user"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtNombre"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Jorge Saa"
-                android:textColor="#8A000000" />
-            <!--
-                        <Button
-                            android:id="@+id/arrowBtn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_below="@id/imgPortada"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:background=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.885"
-                            app:layout_constraintStart_toEndOf="@+id/txtNombre"
-                            app:layout_constraintTop_toBottomOf="@+id/imgPortada"
-                            tools:ignore="MissingConstraints" />
-                            -->
+
             <RelativeLayout
                 android:id="@+id/expandableView"
                 android:layout_width="match_parent"

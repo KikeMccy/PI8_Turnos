@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        style="@style/CardView.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#DFE67E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/txt_titulo_institucion"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/txtNombre"
+                android:text="Tiene turno en:"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+
+                <TextView
+                    android:id="@+id/txt_institucion_mis_turnos"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNombre"
+                    android:layout_marginTop="10dp"
+                    android:text="inicio"
+                    android:gravity="center"
+                    android:textColor="#8A000000"
+                    android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_titulo_hora_inicio"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNombre"
+                    android:layout_marginStart="95dp"
+                    android:text="Hora de inicio: "
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_hora_incio_mis_turnos"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNombre"
+                    android:text="inicio"
+                    android:textColor="#8A000000"
+                    android:textSize="15dp" />
+
+                ></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_titulo_hora_fin"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNombre"
+                    android:layout_marginStart="95dp"
+                    android:text="Hora de finalización: "
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_hora_fin_mis_turnos"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNombre"
+                    android:text="fin"
+                    android:textColor="#8A000000"
+                    android:textSize="15dp" />
+                ></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_titulo_fecha"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNombre"
+                    android:layout_marginStart="95dp"
+                    android:text="Fecha: "
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_fecha_mis_turno"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNombre"
+                    android:text="fecha"
+                    android:textColor="#8A000000"
+                    android:textSize="15dp" />
+                ></LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:id="@+id/img_cancelar_turno"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/delete_ticket" />
+            <ImageView
+                android:id="@+id/img_notificar_turno"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/notificacion_turno" />
+            ></LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

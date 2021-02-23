@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".TurnosInstitucionesActivity">
-
+    tools:context=".ListadoTurnosActivity">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/appbar_turnos_instituciones"
+        android:id="@+id/appbar_turnos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -26,7 +25,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/aclonica"
         android:gravity="center"
-        android:text="LISTADO"
+        android:text="HORARIOS"
         android:textColor="@android:color/holo_orange_light"
         android:textSize="24sp"></TextView>
     <TextView
@@ -35,15 +34,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
-        android:text="Seleccione una área: "
+        android:text="Seleccione el un turno: "
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold|italic" />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcl_turnos"
+        android:id="@+id/rcl_horario"
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="159dp" />
+        android:layout_marginTop="30dp"
+        tools:layout_editor_absoluteX="109dp"
+        tools:layout_editor_absoluteY="125dp" />
 </LinearLayout>

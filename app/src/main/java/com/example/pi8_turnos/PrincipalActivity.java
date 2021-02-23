@@ -141,6 +141,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         startActivity(intent);
         //startActivity(new Intent(PrincipalActivity.this, InstitucionesActivity.class));
     }
+    public void abrirMisTurnos(View view){
+        startActivity(new Intent(PrincipalActivity.this,MisTurnosActivity.class));
+    }
 
 
     // BOTON ATRAS

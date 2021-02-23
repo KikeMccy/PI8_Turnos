@@ -68,7 +68,6 @@ public class InstitucionesUserActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull myviewholder holder, final int position, @NonNull InstitucionUser model)
                     {
-                        holder.nombreusuario.setText(model.getNombreusuario());
                         holder.nombreinstitucion.setText(model.getNombreinstitucion());
                         Glide.with(holder.urlimagen.getContext()).load(model.getUrlimagen()).into(holder.urlimagen);
 
@@ -107,7 +106,6 @@ public class InstitucionesUserActivity extends AppCompatActivity {
             super(itemView);
             urlimagen=(ImageView) itemView.findViewById(R.id.imgPortada_user);
             nombreinstitucion=(TextView) itemView.findViewById(R.id.txtNombre_user);
-            nombreusuario=(TextView)itemView.findViewById(R.id.txt_usuario_item_user);
 
         }
     }

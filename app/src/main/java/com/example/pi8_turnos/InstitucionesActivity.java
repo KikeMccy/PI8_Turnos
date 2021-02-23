@@ -3,6 +3,7 @@ package com.example.pi8_turnos;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -53,6 +54,7 @@ import id.zelory.compressor.Compressor;
 
 public class InstitucionesActivity extends AppCompatActivity {
 
+    private ImageView buscar,ver_ubicacion;
     private Button subir,seleccionar,ubicacion;
     private EditText txt_nombre;
     private ImageView foto;
@@ -70,7 +72,8 @@ public class InstitucionesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_instituciones);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_crear_instituciones);
+        setSupportActionBar(toolbar);
         int permisionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
 
@@ -85,20 +88,22 @@ public class InstitucionesActivity extends AppCompatActivity {
         txt_nombre=(EditText) findViewById(R.id.txt_nombre_institucion);
             foto=findViewById(R.id.img_foto);
             subir=findViewById(R.id.btn_cargar_foto);
-            seleccionar=findViewById(R.id.btn_seleccionar_foto);
-            ubicacion=(Button) findViewById(R.id.btn_seleccionar_ubicacion);
+            //seleccionar=findViewById(R.id.btn_seleccionar_foto);
+            //ubicacion=(Button) findViewById(R.id.btn_seleccionar_ubicacion);
+            buscar=(ImageView)findViewById(R.id.img_buscar_logo);
+            ver_ubicacion=(ImageView) findViewById(R.id.img_seleccionar_ubicacion);
             text_ubi=(TextView) findViewById(R.id.txt_ubicacion);
             databaseReference= FirebaseDatabase.getInstance().getReference().child("Instituciones");
             storageReference= FirebaseStorage.getInstance().getReference().child("img_comprimidas");
 
             cargado=new ProgressDialog(this);
-            seleccionar.setOnClickListener(new View.OnClickListener() {
+            buscar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     CropImage.startPickImageActivity(InstitucionesActivity.this);
                 }
             });
-            ubicacion.setOnClickListener(new View.OnClickListener() {
+            ver_ubicacion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     LocationManager locationManager=(LocationManager) InstitucionesActivity.this.getSystemService(Context.LOCATION_SERVICE);
@@ -161,15 +166,19 @@ public class InstitucionesActivity extends AppCompatActivity {
                 subir.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        String nombre_ins = txt_nombre.getText().toString().trim();
+                        if (nombre_ins.equals("")) {
+                            txt_nombre.setError("Requiere nombre");
+                        }else {
                         cargado.setTitle("Subiendo foto...");
                         cargado.setMessage("Espere por favor...");
                         cargado.show();
-                        StorageReference ref=storageReference.child(aleatorio);
-                        UploadTask uploadTask  = ref.putBytes(bytes);
+                        StorageReference ref = storageReference.child(aleatorio);
+                        UploadTask uploadTask = ref.putBytes(bytes);
                         Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                             @Override
                             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                if(!task.isSuccessful()){
+                                if (!task.isSuccessful()) {
                                     throw Objects.requireNonNull(task.getException());
                                 }
                                 return ref.getDownloadUrl();
@@ -178,11 +187,11 @@ public class InstitucionesActivity extends AppCompatActivity {
                         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
-                                Uri downloaduri= task.getResult();
-                                String nombre_ins=txt_nombre.getText().toString().trim();
-                                Map<String, Object> map=new HashMap<>();
+                                Uri downloaduri = task.getResult();
+
+                                Map<String, Object> map = new HashMap<>();
                                 map.put("idusuario", id_user);
-                                map.put("nombreusuario",nombre);
+                                map.put("nombreusuario", nombre);
                                 map.put("nombreinstitucion", nombre_ins);
                                 map.put("urlimagen", downloaduri.toString());
                                 map.put("latitud", latitud.toString());
@@ -191,10 +200,10 @@ public class InstitucionesActivity extends AppCompatActivity {
                                 databaseReference.push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task2) {
-                                        if(task2.isSuccessful()){
-                                            startActivity(new Intent(InstitucionesActivity.this,PrincipalActivity.class));
-                                        }else {
-                                            Toast.makeText(InstitucionesActivity.this,"No se pudo crear los datos correctamente", Toast.LENGTH_SHORT).show();
+                                        if (task2.isSuccessful()) {
+                                            startActivity(new Intent(InstitucionesActivity.this, PrincipalActivity.class));
+                                        } else {
+                                            Toast.makeText(InstitucionesActivity.this, "No se pudo crear los datos correctamente", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -202,6 +211,7 @@ public class InstitucionesActivity extends AppCompatActivity {
                                 Toast.makeText(InstitucionesActivity.this, "Imagen cargada con exito", Toast.LENGTH_SHORT).show();
                             }
                         });
+                    }
                     }
                 });
 

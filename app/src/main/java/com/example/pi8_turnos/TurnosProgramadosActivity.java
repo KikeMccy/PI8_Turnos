@@ -42,14 +42,14 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turnos_programados);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_turnos_programados);
         setSupportActionBar(toolbar);
-
 
         fecha = getIntent().getStringExtra("fecha");
         idInstitucion = getIntent().getStringExtra("id_institucion");
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
         recyclerView = (RecyclerView) findViewById(R.id.rcl_turnosCalendar);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

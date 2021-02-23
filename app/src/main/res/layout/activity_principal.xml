@@ -75,7 +75,8 @@
             android:layout_height="130dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="60dp"
-            android:background="@drawable/boton_ver_turnos" />
+            android:background="@drawable/boton_ver_turnos"
+            android:onClick="abrirMisTurnos"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,7 +97,7 @@
             android:id="@+id/textView_titulo_menu_ver_turnos"
             android:layout_width="205dp"
             android:layout_height="wrap_content"
-            android:text="Ver turnos"
+            android:text="Mis turnos"
             android:textColor="#000000"
             android:gravity="center"
             android:textSize="18sp"

@@ -22,10 +22,21 @@
         />
 
     <TextView
+        android:id="@+id/textView_titulo_instituciones_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center"
+        android:text="INSTITUCIONES"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    <TextView
         android:id="@+id/textView_titulo_instituciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="Seleccione una institucion: "
         android:textColor="#000000"
         android:textSize="18sp"

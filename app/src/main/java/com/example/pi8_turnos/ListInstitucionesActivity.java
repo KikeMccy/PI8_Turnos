@@ -81,6 +81,7 @@ public class ListInstitucionesActivity extends AppCompatActivity {
                         holder.nombreusuario.setText(model.getNombreusuario());
                         holder.nombreinstitucion.setText(model.getNombreinstitucion());
                         Glide.with(holder.urlimagen.getContext()).load(model.getUrlimagen()).into(holder.urlimagen);
+                        String nombre_institucion= model.getNombreinstitucion();
                         holder.ubicacion.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -119,7 +120,8 @@ public class ListInstitucionesActivity extends AppCompatActivity {
                             {
                                 String id = getRef(position).getKey();
                                 Intent intent=new Intent(ListInstitucionesActivity.this,TurnosInstitucionesActivity.class);
-
+                                intent.putExtra("id_institucion", id);
+                                intent.putExtra("nombreinstitucion", nombre_institucion);
                                 startActivity(intent);
 
                             }
@@ -206,6 +208,7 @@ public class ListInstitucionesActivity extends AppCompatActivity {
                         holder.nombreusuario.setText(model.getNombreusuario());
                         holder.nombreinstitucion.setText(model.getNombreinstitucion());
                         Glide.with(holder.urlimagen.getContext()).load(model.getUrlimagen()).into(holder.urlimagen);
+                        String nombre_institucion= model.getNombreinstitucion();
                         holder.ubicacion.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -243,7 +246,10 @@ public class ListInstitucionesActivity extends AppCompatActivity {
                             public void onClick(View view)
                             {
                                 String id = getRef(position).getKey();
-
+                                Intent intent=new Intent(ListInstitucionesActivity.this,TurnosInstitucionesActivity.class);
+                                intent.putExtra("id_institucion", id);
+                                intent.putExtra("nombreinstitucion", nombre_institucion);
+                                startActivity(intent);
                             }
                         });
                     }

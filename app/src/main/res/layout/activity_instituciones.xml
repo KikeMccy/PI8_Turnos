@@ -7,6 +7,27 @@
     android:orientation="vertical"
     android:background="#ffffff"
     tools:context=".InstitucionesActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar_crear_instituciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/toolbar_redondear"
+        android:layout_marginRight="10dp"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center"
+        android:text="REGISTRO DE INSTITUCIONES"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="24sp"></TextView>
     <ScrollView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -38,13 +59,13 @@
               android:id="@+id/txt_buscar_foto"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="70dp"
-              android:layout_marginTop="10dp"
+              android:layout_marginLeft="120dp"
+              android:layout_marginTop="25dp"
               android:text="Buscar imagen: "
               android:textColor="@color/black"
               android:textSize="18sp" />
 
-          <Button
+          <!--<Button
         android:id="@+id/btn_seleccionar_foto"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
@@ -52,7 +73,15 @@
         android:layout_margin="10dp"
         android:text="..."
         android:background="@drawable/redondear_boton"
-        ></Button>
+        ></Button>-->
+          <ImageView
+              android:id="@+id/img_buscar_logo"
+              android:layout_width="40dp"
+              android:layout_height="40dp"
+              android:layout_marginTop="15dp"
+              android:clickable="true"
+              android:scaleType="centerInside"
+              android:src="@drawable/buscar_img_instituciones" />
             ></LinearLayout>
             <ImageView
 
@@ -73,23 +102,27 @@
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
-            <LinearLayout
+            <ImageView
+                android:id="@+id/img_seleccionar_ubicacion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ubicacion" />
+
 
                 <TextView
                     android:id="@+id/txt_ubicacion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
-                    android:layout_marginTop="0dp"
-                    android:text="ubicacion GPS       "
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Ubicacion GPS       "
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <Button
+                <!--<Button
                     android:id="@+id/btn_seleccionar_ubicacion"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
@@ -97,8 +130,7 @@
                     android:background="#FFFFFF"
 
                     android:foreground="@drawable/ubicacion"
-                    android:textColor="@color/black"></Button>
-                ></LinearLayout>
+                    android:textColor="@color/black"></Button>-->
 
             <TextView
                 android:id="@+id/textView_titulo_instituciones_ingresar"
@@ -116,6 +148,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre institución"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 />
     <Button

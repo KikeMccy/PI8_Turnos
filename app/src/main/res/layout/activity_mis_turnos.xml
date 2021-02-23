@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".TurnosInstitucionesActivity">
+    tools:context=".MisTurnosActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/appbar_turnos_instituciones"
+        android:id="@+id/appbar_mis_turnos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -21,29 +20,32 @@
         android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
         />
     <TextView
+        android:id="@+id/textView_titulo_instituciones_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/aclonica"
-        android:gravity="center"
-        android:text="LISTADO"
-        android:textColor="@android:color/holo_orange_light"
-        android:textSize="24sp"></TextView>
-    <TextView
-        android:id="@+id/textView_titulo_instituciones"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"
-        android:text="Seleccione una área: "
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold|italic" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcl_turnos"
-        android:layout_width="match_parent"
         android:layout_marginTop="30dp"
+        android:text="MIS TURNOS"
+        android:textColor="@android:color/holo_orange_light"
+        android:fontFamily="@font/aclonica"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView_descripcion_modulo_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp"
+        android:text="Este modulo presenta los turnos que se han solicitado."
+        android:textSize="14sp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcl_mis_turnos"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="159dp" />
+        android:layout_marginTop="30dp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="128dp" />
 </LinearLayout>
