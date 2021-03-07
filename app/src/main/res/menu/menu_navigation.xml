@@ -3,20 +3,36 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/item_inicio"
+            android:title="Inicio"
+            android:icon="@drawable/icono_home">
+        </item>
+        <item
+            android:id="@+id/item_perfil"
+            android:title="Perfil"
+            android:icon="@drawable/icono_perfil">
+        </item>
+        <item
+            android:id="@+id/item_generar_turno"
+            android:title="Generar turnos"
+            android:icon="@drawable/icono_generar">
+        </item>
+        <item
             android:id="@+id/Otros"
-            android:title="Aplicación"
+            android:title="Otros"
             >
             <menu>
-            <item
-                android:id="@+id/item_sugerencias"
-                android:title="Sugerencias"
-                android:icon="@drawable/icono_sugerencias">
-            </item>
-            <item
-            android:id="@+id/item_informacion"
-            android:title="About"
-            android:icon="@drawable/ic_informacion">
-            </item>
+                <item
+                    android:id="@+id/item_escanear"
+                    android:title="Escanear QR"
+                    android:icon="@drawable/icono_qr">
+                </item>
+
+                <item
+                android:id="@+id/item_informacion"
+                android:title="About"
+                android:icon="@drawable/ic_informacion">
+                </item>
             </menu>
             ></item>
     </group>

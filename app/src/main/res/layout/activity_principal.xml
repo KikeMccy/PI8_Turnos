@@ -5,163 +5,83 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/fondo_degradado"
     tools:context=".PrincipalActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/toolbar_redondear"
-        android:layout_marginRight="10dp"
-        android:elevation="4dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
-        />
-
-    <TextView
-        android:id="@+id/txt_bienvedida"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/aclonica"
-        android:text="Bienvenid@"
-        android:textAlignment="center"
-        android:textSize="36sp" />
-   <!-- <TextView
-        android:id="@+id/txt_nombre_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:layout_marginTop="15dp"
-        />
-    <TextView
-        android:id="@+id/txt_email_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_margin="15dp"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        />-->
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
 
-
-        <ImageButton
-            android:id="@+id/img_btn_instituciones"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/boton_menu_principal"
-            android:onClick="abrirInstituciones" />
-
-        <ImageButton
-            android:id="@+id/img_btn_turnos"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/boton_ver_turnos"
-            android:onClick="abrirMisTurnos"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/toolbar_redondear"
+            android:layout_marginRight="10dp"
+            android:elevation="4dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+            />
 
         <TextView
-            android:id="@+id/textView_titulo_menu_instituciones"
-            android:layout_width="205dp"
+            android:id="@+id/textView_titulo_instituciones_1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Instituciones"
-            android:textColor="#000000"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/aclonica"
             android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
-        <TextView
-            android:id="@+id/textView_titulo_menu_ver_turnos"
-            android:layout_width="205dp"
-            android:layout_height="wrap_content"
-            android:text="Mis turnos"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-        <ImageButton
-            android:id="@+id/img_btn_crear"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/boton_crear_institucion"
+            android:text="BIENVENIDO"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/img_abrir_instituciones"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="80dp"
             android:clickable="true"
-            android:onClick="abririmagen" />
+            android:onClick="abrirInstituciones"
+            android:scaleType="centerInside"
+            android:src="@drawable/city_96px" />
 
-        <ImageButton
-            android:id="@+id/img_btn_otros"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/boton_add_turnos"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
+            android:gravity="center"
+            android:text="INSTITUCIONES"
+            android:textColor="#9C27B0"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_abir_mis_turnos"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="80dp"
             android:clickable="true"
-            android:onClick="verinstitucionesuser" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+            android:onClick="abrirMisTurnos"
+            android:scaleType="centerInside"
+            android:src="@drawable/two_tickets_96px" />
 
         <TextView
-            android:id="@+id/textView_titulo_menu_add_instituciones"
-            android:layout_width="205dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Añadir institución"
-            android:textColor="#000000"
+            android:fontFamily="@font/aclonica"
             android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
-        <TextView
-            android:id="@+id/textView_titulo_menu_asignar_turnos"
-            android:layout_width="205dp"
-            android:layout_height="wrap_content"
-            android:text="Asignar turnos"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
-
-
+            android:text="MIS TURNOS"
+            android:textColor="#9C27B0"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
-</LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"

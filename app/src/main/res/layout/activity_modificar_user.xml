@@ -4,64 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="false"
     android:orientation="vertical"
+    android:background="@drawable/fondo_degradado"
     android:padding="20dp"
     tools:context=".RegistroActivity">
 
-    <LinearLayout android:layout_width="match_parent"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center"
+
+        android:text="MI PERFIL"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="24sp"></TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/img_login_user"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
             android:contentDescription="Email reestablecer"
             android:gravity="center"
             android:scaleType="centerInside"
-            android:src="@drawable/edit_user"
-            />
+            android:src="@drawable/male_user_96px" />
     </LinearLayout>
+
     <ScrollView
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
-            android:orientation="vertical"
-            >
-    <EditText
-        android:id="@+id/txt_nombre_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:layout_marginTop="50dp"
-        />
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/txt_cedula_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:hint="Cedula" />
+
+            <EditText
+                android:id="@+id/txt_nombre_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Nombre" />
+
+            <EditText
+                android:id="@+id/txt_email_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:enabled="false"
+                android:clickable="false"
+                android:hint="Email" />
 
 
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        >
-
-        <Button
-            android:id="@+id/btn_update"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/redondear_boton"
-            android:text="Actualizar datos"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="20dp"
             />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/btn_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/redondear_boton"
+                    android:text="Actualizar datos"
+                    android:textColor="@android:color/white" />
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

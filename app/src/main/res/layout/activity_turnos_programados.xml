@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/fondo_degradado"
     tools:context=".TurnosProgramadosActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -34,6 +35,17 @@
         android:text="TURNOS PROGRAMADOS"
         android:textColor="@android:color/holo_orange_light"
         android:textSize="24sp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:text="En este modulo se pueden visualizar los turnos que se han programado en una fecha específica."
+        android:textColor="@color/black"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcl_turnosCalendar"
         android:layout_width="match_parent"

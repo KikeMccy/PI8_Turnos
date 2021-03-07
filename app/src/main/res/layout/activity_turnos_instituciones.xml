@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical"
+    android:background="@drawable/fondo_degradado"
+    android:id="@+id/drawer_layout_turnos_instituciones"
     tools:context=".TurnosInstitucionesActivity">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/appbar_turnos_instituciones"
         android:layout_width="match_parent"
@@ -46,4 +50,14 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="191dp"
         tools:layout_editor_absoluteY="159dp" />
-</LinearLayout>
+
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_turnos_instituciones"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/menu_navigation" />
+</androidx.drawerlayout.widget.DrawerLayout>

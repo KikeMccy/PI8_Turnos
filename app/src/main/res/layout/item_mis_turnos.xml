@@ -142,20 +142,21 @@
             >
             <ImageView
                 android:id="@+id/img_cancelar_turno"
-                android:layout_width="200dp"
+                android:layout_width="170dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="5dp"
                 android:clickable="true"
                 android:scaleType="centerInside"
                 android:src="@drawable/delete_ticket" />
+
             <ImageView
-                android:id="@+id/img_notificar_turno"
+                android:id="@+id/img_codigo_qr"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="5dp"
                 android:clickable="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/notificacion_turno" />
+                android:src="@drawable/img_qr_codde" />
             ></LinearLayout>
 
 

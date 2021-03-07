@@ -4,18 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,23 +43,45 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
-public class ListadoTurnosActivity extends AppCompatActivity {
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+public class ListadoTurnosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-    private String id_turno,id_usuario,nombre,date,id_institucion,nombre_institucion;
+    private String id_turno,id_usuario,nombre,date,id_institucion,nombre_institucion,correo;
+    private ProgressDialog mDialog;
+    DrawerLayout drawerLayout;
+    private NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_turnos);
 
+        drawerLayout=(DrawerLayout) findViewById(R.id.listado_turnos);
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
+        mDialog=new ProgressDialog(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_turnos);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icono_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navView = (NavigationView)findViewById(R.id.nav_view_listado_turnos);
+        navView.setNavigationItemSelectedListener(this);
+        navView.setItemIconTintList(null);
+
         id_turno=getIntent().getStringExtra("id_turno");
         date=getIntent().getStringExtra("fecha");
         id_institucion=getIntent().getStringExtra("id_institucion");
@@ -61,6 +90,9 @@ public class ListadoTurnosActivity extends AppCompatActivity {
         getInfoUser();
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         //Toast.makeText(ListadoTurnosActivity.this, id_turno, Toast.LENGTH_SHORT).show();
+        mDialog.setMessage("Cargando horarios...");
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.show();
 
     }
     private void getInfoUser(){
@@ -71,6 +103,10 @@ public class ListadoTurnosActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     nombre=snapshot.child("nombre").getValue().toString();
+                    correo=snapshot.child("email").getValue().toString();
+                    View header = ((NavigationView)findViewById(R.id.nav_view_listado_turnos)).getHeaderView(0);
+                    ((TextView) header.findViewById(R.id.txt_nav_usuario)).setText(nombre);
+                    ((TextView) header.findViewById(R.id.txt_nav_correo)).setText(correo);
                 }
             }
 
@@ -96,6 +132,7 @@ public class ListadoTurnosActivity extends AppCompatActivity {
                         holder.hora_fin.setText(model.getHora_fin());
                         holder.estado.setText(model.getEstado());
                         holder.numero.setText("Turno Nº"+model.getNumero());
+                        mDialog.dismiss();
                         String h_inicio=model.getHora_inicio();
                         String h_fin=model.getHora_fin();
                         String status = model.getEstado();
@@ -132,20 +169,44 @@ public class ListadoTurnosActivity extends AppCompatActivity {
                                                                 mapinsert.put("id_institucion",id_institucion);
                                                                 mapinsert.put("nombre_institucion",nombre_institucion);
                                                                 mapinsert.put("id_horario", id);
+                                                                mapinsert.put("estado", "pendiente");
 
                                                                 databaseReference.child("TurnosAsignados").push().setValue(mapinsert).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task2) {
                                                                         if(task2.isSuccessful()){
-                                                                            startActivity(new Intent(ListadoTurnosActivity.this,MisTurnosActivity.class));
-                                                                            Toast.makeText(ListadoTurnosActivity.this, "Turno Asignado", Toast.LENGTH_SHORT).show();
+                                                                            databaseReference.child("Instituciones").child(id_institucion).addValueEventListener(new ValueEventListener() {
+                                                                                @Override
+                                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                                    if(snapshot.exists()){
+                                                                                        String nombre_usuario=snapshot.child("nombreusuario").getValue().toString();
+                                                                                        final String recipientEmail = "pi8semestre@gmail.com";
+                                                                                        final String recipientPassword = "8SemestrePI";
+                                                                                        sendEmailWithGmail(recipientEmail, recipientPassword, correo, "Turno Movil", "Ust tiene un turno pendiente en la institución: "+nombre_institucion+" Con el usuario: "+nombre_usuario+" el: "+date+", la hora de inicio es: "+h_inicio+" y la hora de finalización es: "+h_fin+". Recuerde estar pendiente al turno.");
+                                                                                        //Snackbar snackbar=Snackbar.make(drawerLayout, "Turno Asignado", Snackbar.LENGTH_SHORT);
+                                                                                        //snackbar.show();
+                                                                                        Intent intent=new Intent(ListadoTurnosActivity.this,MisTurnosActivity.class);
+                                                                                        startActivity(intent);
+                                                                                        Toast.makeText(ListadoTurnosActivity.this, "Turno Asignado", Toast.LENGTH_SHORT).show();
+
+                                                                                    }
+                                                                                }
+                                                                                @Override
+                                                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                                                }
+                                                                            });
+
                                                                         }else {
+                                                                            //Snackbar snackbar=Snackbar.make(drawerLayout, "No se pudo crear los datos correctamente", Snackbar.LENGTH_SHORT);
+                                                                            //snackbar.show();
                                                                             Toast.makeText(ListadoTurnosActivity.this,"No se pudo crear los datos correctamente", Toast.LENGTH_SHORT).show();
                                                                         }
                                                                     }
                                                                 });
 
                                                             } else {
+                                                                //Snackbar snackbar=Snackbar.make(drawerLayout, "Error al asignar turno, intente nuevamente", Snackbar.LENGTH_SHORT);
+                                                                //snackbar.show();
                                                                 Toast.makeText(ListadoTurnosActivity.this, "Error al asignar turno, intente nuevamente", Toast.LENGTH_SHORT).show();
                                                             }
                                                         }
@@ -181,6 +242,48 @@ public class ListadoTurnosActivity extends AppCompatActivity {
         adapter.startListening();
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_inicio:
+                startActivity(new Intent(ListadoTurnosActivity.this,PrincipalActivity.class));
+                break;
+            case R.id.item_perfil:
+                startActivity(new Intent(ListadoTurnosActivity.this,ModificarUserActivity.class));
+                break;
+            case R.id.item_informacion:
+                startActivity(new Intent(ListadoTurnosActivity.this,AboutActivity.class));
+                break;
+            case R.id.item_escanear:
+                startActivity(new Intent(ListadoTurnosActivity.this,LeerQRActivity.class));
+                break;
+            case R.id.item_generar_turno:
+                startActivity(new Intent(ListadoTurnosActivity.this,GenerarTurnosActivity.class));
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.opc_cerrar_sesion:{
+                firebaseAuth.signOut();
+                startActivity(new Intent(ListadoTurnosActivity.this,MainActivity.class));
+                finish();
+                break;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     class myviewholder extends RecyclerView.ViewHolder{
 
         TextView hora_inicio, hora_fin, estado,numero;
@@ -196,5 +299,81 @@ public class ListadoTurnosActivity extends AppCompatActivity {
 
         }
     }
+    private void sendEmailWithGmail(final String recipientEmail, final String recipientPassword,
+                                    String to, String subject, String message) {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
 
+        Session session = Session.getDefaultInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(recipientEmail, recipientPassword);
+            }
+        });
+
+        SenderAsyncTask task = new SenderAsyncTask(session, recipientEmail, to, subject, message);
+        task.execute();
+    }
+
+    private class SenderAsyncTask extends AsyncTask<String, String, String> {
+
+        private String from, to, subject, message;
+        private ProgressDialog progressDialog;
+        private Session session;
+
+        public SenderAsyncTask(Session session, String from, String to, String subject, String message) {
+            this.session = session;
+            this.from = from;
+            this.to = to;
+            this.subject = subject;
+            this.message = message;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(ListadoTurnosActivity.this, "Éxito", "Mensaje enviado", true);
+            progressDialog.setCancelable(false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                Message mimeMessage = new MimeMessage(session);
+                mimeMessage.setFrom(new InternetAddress(from));
+                mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+                mimeMessage.setSubject(subject);
+                mimeMessage.setContent(message, "text/html; charset=utf-8");
+                Transport.send(mimeMessage);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                return e.getMessage();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return e.getMessage();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            progressDialog.setMessage(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.dismiss();
+            //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }

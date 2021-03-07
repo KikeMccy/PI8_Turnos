@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pi8_turnos.Model.Entidades;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -31,12 +33,14 @@ public class LoginActivity extends AppCompatActivity {
     private String email="",password="";
     private FirebaseAuth firebaseAuth;
     private ProgressDialog mDialog;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        linearLayout=(LinearLayout) findViewById(R.id.login);
         firebaseAuth=FirebaseAuth.getInstance();
         mDialog=new ProgressDialog(this);
         txt_email=(EditText) findViewById(R.id.txt_email_login);
@@ -76,7 +80,9 @@ public class LoginActivity extends AppCompatActivity {
                     if(password.equals("")) {
                         txt_password.setError("Ingrese contraseña");
                     }
-                    Toast.makeText(LoginActivity.this,"Complete los campos", Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar=Snackbar.make(linearLayout, "Complete los casilleros", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    //Toast.makeText(LoginActivity.this,"Complete los campos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -90,7 +96,9 @@ public class LoginActivity extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
                 }else{
-                    Toast.makeText(LoginActivity.this,"Datos incorrectos", Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar=Snackbar.make(linearLayout, "Datos incorrectos", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    //Toast.makeText(LoginActivity.this,"Datos incorrectos", Toast.LENGTH_SHORT).show();
                 }
                 mDialog.dismiss();
             }

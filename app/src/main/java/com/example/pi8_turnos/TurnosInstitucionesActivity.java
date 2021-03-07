@@ -3,6 +3,8 @@ package com.example.pi8_turnos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,12 +34,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class TurnosInstitucionesActivity extends AppCompatActivity {
+public class TurnosInstitucionesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private RecyclerView recyclerView;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private String idInstitucion, usuario, nombre, institucion,nombre_institucion;
+    DrawerLayout drawerLayout;
+    private NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,14 @@ public class TurnosInstitucionesActivity extends AppCompatActivity {
         databaseReference= FirebaseDatabase.getInstance().getReference();
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_turnos_instituciones);
         setSupportActionBar(toolbar);
+
+        drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout_turnos_instituciones);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icono_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navView = (NavigationView)findViewById(R.id.nav_view_turnos_instituciones);
+        navView.setNavigationItemSelectedListener(this);
+        navView.setItemIconTintList(null);
+        getInfoUser();
         idInstitucion=getIntent().getStringExtra("id_institucion");
         nombre_institucion=getIntent().getStringExtra("nombreinstitucion");
         //Toast.makeText(TurnosInstitucionesActivity.this, idInstitucion, Toast.LENGTH_SHORT).show();
@@ -127,6 +141,45 @@ public class TurnosInstitucionesActivity extends AppCompatActivity {
         adapter.startListening();
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_inicio:
+                startActivity(new Intent(TurnosInstitucionesActivity.this,PrincipalActivity.class));
+                break;
+            case R.id.item_informacion:
+                startActivity(new Intent(TurnosInstitucionesActivity.this,AboutActivity.class));
+                break;
+            case R.id.item_escanear:
+                startActivity(new Intent(TurnosInstitucionesActivity.this,LeerQRActivity.class));
+                break;
+            case R.id.item_generar_turno:
+                startActivity(new Intent(TurnosInstitucionesActivity.this,GenerarTurnosActivity.class));
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.opc_cerrar_sesion:{
+                firebaseAuth.signOut();
+                startActivity(new Intent(TurnosInstitucionesActivity.this,MainActivity.class));
+                finish();
+                break;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     class myviewholder extends RecyclerView.ViewHolder{
 
         TextView nombreinstitucion, fecha;
@@ -139,6 +192,34 @@ public class TurnosInstitucionesActivity extends AppCompatActivity {
             fecha=(TextView)itemView.findViewById(R.id.txt_fecha_turno);
 
         }
+    }
+
+    private void getInfoUser(){
+        String id=firebaseAuth.getCurrentUser().getUid();
+        databaseReference.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String nombre_user=snapshot.child("nombre").getValue().toString();
+                    String email_user=snapshot.child("email").getValue().toString();
+                    View header = ((NavigationView)findViewById(R.id.nav_view_turnos_instituciones)).getHeaderView(0);
+                    ((TextView) header.findViewById(R.id.txt_nav_usuario)).setText(nombre_user);
+                    ((TextView) header.findViewById(R.id.txt_nav_correo)).setText(email_user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
 }

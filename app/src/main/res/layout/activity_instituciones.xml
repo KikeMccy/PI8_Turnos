@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ffffff"
+    android:id="@+id/drawer_layout_instituciones"
+    android:background="@drawable/fondo_degradado"
     tools:context=".InstitucionesActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/mis_instituciones2"
+        >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/appbar_crear_instituciones"
         android:layout_width="match_parent"
@@ -27,7 +33,7 @@
         android:gravity="center"
         android:text="REGISTRO DE INSTITUCIONES"
         android:textColor="@android:color/holo_orange_light"
-        android:textSize="24sp"></TextView>
+        android:textSize="24sp"/>
     <ScrollView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -160,8 +166,16 @@
         android:layout_margin="10dp"
         android:text="Registrar"
         android:background="@drawable/redondear_boton"
-        ></Button>
+        />
             ></LinearLayout>
         ></ScrollView>
-
-</LinearLayout>
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_instituciones"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/menu_navigation" />
+</androidx.drawerlayout.widget.DrawerLayout>

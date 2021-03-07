@@ -82,35 +82,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:textColor="#8A000000" />
-            <!--
-                        <Button
-                            android:id="@+id/arrowBtn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_below="@id/imgPortada"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:background=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.885"
-                            app:layout_constraintStart_toEndOf="@+id/txtNombre"
-                            app:layout_constraintTop_toBottomOf="@+id/imgPortada"
-                            tools:ignore="MissingConstraints" />
-                            -->
-            <RelativeLayout
-                android:id="@+id/expandableView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:layout_below="@id/desc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/desc">
 
-            </RelativeLayout>
+
 
         </LinearLayout>
 

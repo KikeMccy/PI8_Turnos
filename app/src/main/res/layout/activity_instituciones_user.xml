@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/mis_instituciones"
+    android:background="@drawable/fondo_degradado"
     tools:context=".InstitucionesUserActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/appbar_instituciones_user"
         android:layout_width="match_parent"
@@ -19,12 +25,20 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
         />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/aclonica"
+            android:gravity="center"
+            android:text="Mis intituciones"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="24sp"/>
     <TextView
         android:id="@+id/textView_titulo_instituciones_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="Seleccione una institucion: "
         android:textColor="#000000"
         android:textSize="18sp"
@@ -47,4 +61,15 @@
         android:layout_marginTop="40dp"
         tools:layout_editor_absoluteX="89dp"
         tools:layout_editor_absoluteY="121dp" />
-</LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_instituciones_user"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/menu_navigation" />
+</androidx.drawerlayout.widget.DrawerLayout>

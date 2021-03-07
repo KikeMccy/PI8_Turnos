@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
-    android:layout_marginTop="10dp"
-    android:background="#ffffff">
+    android:layout_marginTop="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -53,7 +52,7 @@
 
             <TextView
                 android:id="@+id/txt_usuario_item"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtNombre"
@@ -62,45 +61,35 @@
                 android:text="Jorge Saa"
                 android:textColor="#8A000000" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:orientation="horizontal"
+            >
             <ImageView
                 android:id="@+id/img_ubicacion_institucion"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:contentDescription="Email reestablecer"
                 android:gravity="center"
                 android:scaleType="centerInside"
                 android:src="@drawable/ubicacion" />
-            <!--
-                        <Button
-                            android:id="@+id/arrowBtn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_below="@id/imgPortada"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:background=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.885"
-                            app:layout_constraintStart_toEndOf="@+id/txtNombre"
-                            app:layout_constraintTop_toBottomOf="@+id/imgPortada"
-                            tools:ignore="MissingConstraints" />
-                            -->
-            <RelativeLayout
-                android:id="@+id/expandableView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:layout_below="@id/desc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/desc">
 
-            </RelativeLayout>
+            <ImageView
+                android:id="@+id/img_calificar_atencion"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:contentDescription="Email reestablecer"
+                android:gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/estrella" />
+
+        </LinearLayout>
 
         </LinearLayout>
 

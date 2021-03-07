@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/fondo_degradado"
     tools:context=".Calendario_Activity">
 
 
@@ -24,20 +25,31 @@
         android:id="@+id/titulocalendario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
+        android:fontFamily="@font/aclonica"
         android:layout_below="@+id/appbar"
-        android:text="Asignación de Turnos"
+        android:textColor="@android:color/holo_orange_light"
+        android:text="ASIGNACIÓN DE TURNOS"
         android:textSize="24sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:text="Seleccione la fecha en que desea asignar turnos."
+        android:textColor="@color/black"
+        />
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_below="@+id/titulocalendario"
-        android:layout_height="541dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"></CalendarView>
+        android:layout_alignParentBottom="true"/>
 
 
 

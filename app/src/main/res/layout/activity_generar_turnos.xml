@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_degradado"
+    android:id="@+id/drawer_layout_generar_turnos"
+    tools:context=".GenerarTurnosActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/appbar_generar_turnos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/toolbar_redondear"
+            android:layout_marginRight="10dp"
+            android:elevation="4dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+            />
+        <TextView
+            android:id="@+id/textView_titulo_instituciones_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/aclonica"
+            android:gravity="center"
+            android:text="GENERACIÓN DE TURNOS"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/img_instituciones"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="80dp"
+            android:clickable="true"
+            android:onClick="mis_instituciones"
+            android:scaleType="centerInside"
+            android:src="@drawable/organization_96px" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
+            android:gravity="center"
+            android:text="MIS INSTITUCIONES"
+            android:textColor="#9C27B0"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_add_instituciones"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="80dp"
+            android:clickable="true"
+            android:onClick="add_instituciones"
+            android:scaleType="centerInside"
+            android:src="@drawable/add_new_96px" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
+            android:gravity="center"
+            android:text="CREAR INSTITUCIÓN"
+            android:textColor="#9C27B0"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_generar_turnos"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/menu_navigation" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

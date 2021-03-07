@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,6 +21,8 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +33,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,7 +57,7 @@ import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
 
-public class InstitucionesActivity extends AppCompatActivity {
+public class InstitucionesActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
 
     private ImageView buscar,ver_ubicacion;
     private Button subir,seleccionar,ubicacion;
@@ -66,25 +71,38 @@ public class InstitucionesActivity extends AppCompatActivity {
     private String nombre,email,id_user;
     private Double latitud, longitud;
     private TextView text_ubi;
+    DrawerLayout drawerLayout;
+    NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_instituciones);
+
+        firebaseAuth=FirebaseAuth.getInstance();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_crear_instituciones);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icono_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navView = (NavigationView)findViewById(R.id.nav_view_instituciones);
+        navView.setNavigationItemSelectedListener(this);
+        navView.setItemIconTintList(null);
+        getInfoUser();
+
         int permisionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
 
         }else {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
         }
-         nombre = getIntent().getExtras().getString("nombre");
-         email = getIntent().getExtras().getString("email");
-         id_user=getIntent().getExtras().getString("id");
-        //Toast.makeText(InstitucionesActivity.this,id_user,Toast.LENGTH_SHORT).show();
-        firebaseAuth=FirebaseAuth.getInstance();
+
+
+         //nombre = getIntent().getExtras().getString("nombre");
+         //email = getIntent().getExtras().getString("email");
+         //id_user=getIntent().getExtras().getString("id");
+
         txt_nombre=(EditText) findViewById(R.id.txt_nombre_institucion);
             foto=findViewById(R.id.img_foto);
             subir=findViewById(R.id.btn_cargar_foto);
@@ -93,7 +111,7 @@ public class InstitucionesActivity extends AppCompatActivity {
             buscar=(ImageView)findViewById(R.id.img_buscar_logo);
             ver_ubicacion=(ImageView) findViewById(R.id.img_seleccionar_ubicacion);
             text_ubi=(TextView) findViewById(R.id.txt_ubicacion);
-            databaseReference= FirebaseDatabase.getInstance().getReference().child("Instituciones");
+            //databaseReference= FirebaseDatabase.getInstance().getReference().child("Instituciones");
             storageReference= FirebaseStorage.getInstance().getReference().child("img_comprimidas");
 
             cargado=new ProgressDialog(this);
@@ -170,7 +188,7 @@ public class InstitucionesActivity extends AppCompatActivity {
                         if (nombre_ins.equals("")) {
                             txt_nombre.setError("Requiere nombre");
                         }else {
-                        cargado.setTitle("Subiendo foto...");
+                        cargado.setTitle("Creando institución...");
                         cargado.setMessage("Espere por favor...");
                         cargado.show();
                         StorageReference ref = storageReference.child(aleatorio);
@@ -197,18 +215,18 @@ public class InstitucionesActivity extends AppCompatActivity {
                                 map.put("latitud", latitud.toString());
                                 map.put("longitud", longitud.toString());
 
-                                databaseReference.push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                databaseReference.child("Instituciones").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task2) {
                                         if (task2.isSuccessful()) {
-                                            startActivity(new Intent(InstitucionesActivity.this, PrincipalActivity.class));
+                                            startActivity(new Intent(InstitucionesActivity.this, InstitucionesUserActivity.class));
                                         } else {
                                             Toast.makeText(InstitucionesActivity.this, "No se pudo crear los datos correctamente", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
                                 cargado.dismiss();
-                                Toast.makeText(InstitucionesActivity.this, "Imagen cargada con exito", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(InstitucionesActivity.this, "Institucion cargada con exito", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -223,8 +241,78 @@ public class InstitucionesActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){
-            startActivity(new Intent(InstitucionesActivity.this,PrincipalActivity.class));
+            startActivity(new Intent(InstitucionesActivity.this,GenerarTurnosActivity.class));
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_inicio:
+                startActivity(new Intent(InstitucionesActivity.this,PrincipalActivity.class));
+                break;
+            case R.id.item_generar_turno:
+                startActivity(new Intent(InstitucionesActivity.this,GenerarTurnosActivity.class));
+                break;
+            case R.id.item_perfil:
+                startActivity(new Intent(InstitucionesActivity.this,ModificarUserActivity.class));
+                break;
+            case R.id.item_informacion:
+                startActivity(new Intent(InstitucionesActivity.this,AboutActivity.class));
+                break;
+            case R.id.item_escanear:
+                startActivity(new Intent(InstitucionesActivity.this,LeerQRActivity.class));
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout_instituciones);
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.opc_cerrar_sesion:{
+                firebaseAuth.signOut();
+                startActivity(new Intent(InstitucionesActivity.this,MainActivity.class));
+                finish();
+                break;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void getInfoUser(){
+        id_user=firebaseAuth.getCurrentUser().getUid();
+        databaseReference.child("Usuarios").child(id_user).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    nombre=snapshot.child("nombre").getValue().toString();
+                    email=snapshot.child("email").getValue().toString();
+                    View header = ((NavigationView)findViewById(R.id.nav_view_instituciones)).getHeaderView(0);
+                    ((TextView) header.findViewById(R.id.txt_nav_usuario)).setText(nombre);
+                    ((TextView) header.findViewById(R.id.txt_nav_correo)).setText(email);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+
+            }
+        });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
 }

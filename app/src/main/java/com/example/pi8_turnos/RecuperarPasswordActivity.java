@@ -10,10 +10,12 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RecuperarPasswordActivity extends AppCompatActivity {
@@ -23,11 +25,13 @@ public class RecuperarPasswordActivity extends AppCompatActivity {
     private String email="";
     private FirebaseAuth firebaseAuth;
     private ProgressDialog mDialog;
+    LinearLayout linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recuperar_password);
 
+        linearLayout=(LinearLayout) findViewById(R.id.recuperar_password);
         firebaseAuth=FirebaseAuth.getInstance();
         mDialog=new ProgressDialog(this);
         txt_email=(EditText)findViewById(R.id.txt_email_pass);
@@ -45,7 +49,9 @@ public class RecuperarPasswordActivity extends AppCompatActivity {
                     if(email.equals("")){
                      txt_email.setError("Ingrese email");
                     }
-                    Toast.makeText(RecuperarPasswordActivity.this,"Email incorrecto",Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar=Snackbar.make(linearLayout, "Email incorrecto", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    //Toast.makeText(RecuperarPasswordActivity.this,"Email incorrecto",Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -61,9 +67,13 @@ public class RecuperarPasswordActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     txt_email.setText("");
                     startActivity(new Intent(RecuperarPasswordActivity.this,LoginActivity.class));
-                    Toast.makeText(RecuperarPasswordActivity.this,"Se ha enviado un correo para restablecer la contraseña",Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar=Snackbar.make(linearLayout, "Se ha enviado un correo para restablecer la contraseña", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    //Toast.makeText(RecuperarPasswordActivity.this,"Se ha enviado un correo para restablecer la contraseña",Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(RecuperarPasswordActivity.this,"No se pudo restablecer, email no registrado",Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar=Snackbar.make(linearLayout, "No se pudo restablecer, email no registrado", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    //Toast.makeText(RecuperarPasswordActivity.this,"No se pudo restablecer, email no registrado",Toast.LENGTH_SHORT).show();
                 }
                 mDialog.dismiss();
             }

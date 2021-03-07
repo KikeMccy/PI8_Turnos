@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/white">
+    android:background="@drawable/fondo_degradado">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:layout_marginVertical="75dp"
         android:id="@+id/activity_main"
+        android:gravity="center"
         tools:context=".MainActivity">
 
 
@@ -26,15 +26,16 @@
             android:layout_marginEnd="80dp"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/turno" />
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="247dp"
-            android:layout_height="247dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="250dp"
-            android:layout_marginEnd="80dp"
-            android:scaleType="fitStart"
-            app:srcCompat="@drawable/turno2" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TURNO MOVIL"
+            android:fontFamily="@font/aclonica"
+            android:textSize="30dp"
+            android:textColor="#0027FF"
+            android:layout_marginTop="270dp"
+            android:gravity="center"
+            />
 
         <TextView
             android:id="@+id/textView3"

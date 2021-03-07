@@ -52,7 +52,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         navView = (NavigationView)findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
         navView.setItemIconTintList(null);
-        navView.setCheckedItem(R.id.item_sugerencias);
 
         //lb_nombre=(TextView) findViewById(R.id.txt_nombre_user);
         //lb_email=(TextView) findViewById(R.id.txt_email_user);
@@ -115,32 +114,16 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 finish();
                 break;
             }
-            case R.id.opc_modificar_user:{
-                startActivity(new Intent(PrincipalActivity.this,ModificarUserActivity.class));
-                break;
-            }
+
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void verinstitucionesuser(View view){
-        Intent intent=new Intent(PrincipalActivity.this, InstitucionesUserActivity.class);
-        intent.putExtra("nombre",nombre);
-        startActivity(intent);
-    }
+
     public void abrirInstituciones(View view){
         startActivity(new Intent(PrincipalActivity.this,ListInstitucionesActivity.class));
     }
 
-    public void abririmagen(View view){
-
-        Intent intent=new Intent(PrincipalActivity.this, InstitucionesActivity.class);
-        intent.putExtra("nombre",nombre);
-        intent.putExtra("email", email);
-        intent.putExtra("id", id);
-        startActivity(intent);
-        //startActivity(new Intent(PrincipalActivity.this, InstitucionesActivity.class));
-    }
     public void abrirMisTurnos(View view){
         startActivity(new Intent(PrincipalActivity.this,MisTurnosActivity.class));
     }
@@ -182,14 +165,20 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.item_sugerencias:
-                Intent intent=new Intent(PrincipalActivity.this, SugerenciasActivity.class);
-                intent.putExtra("nombre",nombre);
-                startActivity(intent);
+
+            case R.id.item_perfil:
+                startActivity(new Intent(PrincipalActivity.this,ModificarUserActivity.class));
+                break;
+            case R.id.item_generar_turno:
+                startActivity(new Intent(PrincipalActivity.this,GenerarTurnosActivity.class));
                 break;
             case R.id.item_informacion:
                 startActivity(new Intent(PrincipalActivity.this,AboutActivity.class));
                 break;
+            case R.id.item_escanear:
+                startActivity(new Intent(PrincipalActivity.this,LeerQRActivity.class));
+                break;
+
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

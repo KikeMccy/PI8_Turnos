@@ -6,20 +6,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="@drawable/fondo_degradado"
+    android:id="@+id/registo"
     tools:context=".RegistroActivity">
 
+    <TextView
+        android:id="@+id/textView_titulo_instituciones_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center"
+        android:text="REGISTRO DE USUARIOS"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="25dp"
+        android:textStyle="bold" />
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal" >
         <ImageView
             android:id="@+id/img_add_user"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:contentDescription="Add user"
             android:gravity="center"
             android:scaleType="centerInside"
-            android:src="@drawable/add_user" />
+            android:src="@drawable/add_user_male_96px" />
 
     </LinearLayout>
     <TextView

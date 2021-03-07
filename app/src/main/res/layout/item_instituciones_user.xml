@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffffff">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -28,7 +27,7 @@
 
             <ImageView
                 android:id="@+id/imgPortada_user"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/uteq"
@@ -49,20 +48,15 @@
                 android:text="Universidad Tecnica Estatal de Quevedo"
                 app:layout_constraintTop_toBottomOf="@+id/imgPortada" />
 
-
-            <RelativeLayout
-                android:id="@+id/expandableView"
+            <ImageView
+                android:id="@+id/img_eliminar_institucion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:layout_below="@id/desc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/desc">
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/trash_96px" />
 
-            </RelativeLayout>
 
         </LinearLayout>
 
