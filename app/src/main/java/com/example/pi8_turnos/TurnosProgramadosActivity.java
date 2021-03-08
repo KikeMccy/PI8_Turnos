@@ -91,6 +91,7 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                         //Toast.makeText(TurnosProgramadosActivity.this,idInstitucion,Toast.LENGTH_SHORT).show();
                         if (fechaObtenida.equals(fecha) && idInstitucionObtenida.equals(idInstitucion)) {
                             id = ds.getKey();
+
                             //Toast.makeText(TurnosProgramadosActivity.this,id,Toast.LENGTH_SHORT).show();
                             FirebaseRecyclerOptions<PreTurnos> options = new FirebaseRecyclerOptions.Builder<PreTurnos>()
                                     //.setQuery(FirebaseDatabase.getInstance().getReference().child("Turnos").orderByChild("fecha").equalTo(fecha).orderByChild("id_institucion").equalTo(idInstitucion), PreTurnos.class)

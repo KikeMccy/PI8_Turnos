@@ -390,7 +390,7 @@ public class Calendario_Activity extends AppCompatActivity{ //implements Calenda
             //startActivity( new Intent(RegisterActivity.this, LoginActivity.class));
             //Toast.makeText(Calendario_Activity.this, "", Toast.LENGTH_SHORT).show();
 
-            mDataBase.child("Turnos").addValueEventListener(new ValueEventListener() {
+            mDataBase.child("Turnos").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
