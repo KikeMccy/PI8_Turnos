@@ -101,9 +101,9 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                         @Override
                                         protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull PreTurnos model) {
                                             holder.estadoTurno.setText(model.getEstado());
-                                            holder.horaInicioTurno.setText("Inicio: " + model.getHora_inicio());
-                                            holder.horaFinTurno.setText("Fin: " + model.getHora_fin());
-                                            holder.numeroTurno.setText("Turno Número: " + model.getNumero());
+                                            holder.horaInicioTurno.setText(model.getHora_inicio());
+                                            holder.horaFinTurno.setText(model.getHora_fin());
+                                            holder.numeroTurno.setText(model.getNumero());
                                             if (model.getNombre_usuario().equals("ninguno"))
                                                 holder.nombreTurno.setText("");
                                             else
@@ -112,7 +112,7 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onClick(View view) {
 
-                                                    if (model.getEstado().equals("libre")) {
+                                                    if (model.getEstado().equals("libre")||model.getEstado().equals("ocupado")) {
                                                         String idTurno = getRef(position).getKey();
                                                         //Toast.makeText(ListaRecordatoriosActivity.this,id, Toast.LENGTH_SHORT).show();
                                                         AlertDialog.Builder builder = new AlertDialog.Builder(TurnosProgramadosActivity.this);
@@ -203,9 +203,9 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                                                 String us = snapshot.child(idToken).getValue().toString();
                                                                                                 //Toast.makeText(AgregarTurnosActivity.this, us, Toast.LENGTH_SHORT).show();
                                                                                                 //mDataBase.child("Turnos").child(id).child("id_usuario").setValue(us);
-                                                                                                Toast.makeText(TurnosProgramadosActivity.this, us, Toast.LENGTH_SHORT).show();
+                                                                                                //Toast.makeText(TurnosProgramadosActivity.this, us, Toast.LENGTH_SHORT).show();
 
-                                                                                                notificarCambioTurno(us, "Reasignación de Turno", "Su horario ha sido modificado: "+inicioEntretiempo+" - "+finEntretiempo);
+                                                                                                notificarCambioTurno(us, "Reasignación de Turno", "Su horario ha sido modificado: "+inicioEntretiempo.getText().toString()+" - "+finEntretiempo.getText().toString());
                                                                                                 Toast.makeText(TurnosProgramadosActivity.this, "Turno Modificado", Toast.LENGTH_SHORT).show();
 
                                                                                             }

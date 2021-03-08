@@ -67,7 +67,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
             builder.setAutoCancel(true)
                     .setWhen(System.currentTimeMillis())
                     .setContentTitle(titulo)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.turno)
                     .setContentText(detalle)
                     .setContentIntent(clickNotificacion())
                     .setContentInfo("nuevo");
