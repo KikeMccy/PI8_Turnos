@@ -18,6 +18,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.pi8_turnos.Model.PreTurnos;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -29,6 +34,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,6 +55,8 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
     private int horasInicio, minutosInicio;
     private int horasFin, minutosFin;
     private String id;
+    private String idTurnoAsignado;
+    private String idToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,18 +146,6 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                     inicioEntretiempo.setText(model.getHora_inicio());
                                                                     finEntretiempo.setText(model.getHora_fin());
 
-                                                                    /*if (!horasInicioT.equals("")) {
-                                                                        horasInicio = Integer.valueOf(horasInicioT);
-                                                                        minutosInicio = Integer.valueOf(minutosInicioT);
-                                                                        inicioEntretiempo.setText(horasInicioT + ":" + minutosInicioT);
-                                                                    }
-
-
-                                                                    if (!horasFinT.equals("")) {
-                                                                        horasFin = Integer.valueOf(horasFinT);
-                                                                        minutosFin = Integer.valueOf(minutosFinT);
-                                                                        finEntretiempo.setText(horasFinT + ":" + minutosFinT);
-                                                                    }*/
 
                                                                     mBuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                                                         @Override
@@ -159,22 +157,73 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                                 Date inicio = sdf.parse(inicioInString);
 
                                                                                 String finInString = fecha + " " + finEntretiempo.getText().toString() + ":00";
-                                                                                Date fin=sdf.parse(finInString);
+                                                                                Date fin = sdf.parse(finInString);
 
                                                                                 String com = String.valueOf(fin.compareTo(inicio));
 
                                                                                 if (com.equals("1")) {
 
+
+                                                                                    FirebaseDatabase.getInstance().getReference().child("TurnosAsignados").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                        @Override
+                                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                                            if (snapshot.exists()) {
+                                                                                                for (DataSnapshot ds : snapshot.getChildren()) {
+                                                                                                    String turno = ds.child("id_horario").getValue().toString();
+                                                                                                    if (turno.equals(idTurno)) {
+                                                                                                        idTurnoAsignado = ds.getKey();
+                                                                                                        idToken=ds.child("id_usuario").getValue().toString();
+
+                                                                                                        //MODIFICAR NODO TURNOSASIGNADOS
+                                                                                                        FirebaseDatabase.getInstance().getReference().child("TurnosAsignados").child(idTurnoAsignado).child("hora_inicio").setValue(inicioEntretiempo.getText().toString());
+                                                                                                        FirebaseDatabase.getInstance().getReference().child("TurnosAsignados").child(idTurnoAsignado).child("hora_fin").setValue(finEntretiempo.getText().toString());
+
+
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+
+                                                                                        @Override
+                                                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                                        }
+                                                                                    });
+
+                                                                                    //MODIFFICAR NODO TURNOS
                                                                                     FirebaseDatabase.getInstance().getReference().child("Turnos").child(id).child("horario").child(idTurno).child("hora_inicio").setValue(inicioEntretiempo.getText().toString());
                                                                                     FirebaseDatabase.getInstance().getReference().child("Turnos").child(id).child("horario").child(idTurno).child("hora_fin").setValue(finEntretiempo.getText().toString());
-                                                                                    Toast.makeText(TurnosProgramadosActivity.this, "Turno Modificado", Toast.LENGTH_SHORT).show();
 
 
-                                                                                }else {
-                                                                                        Toast.makeText(TurnosProgramadosActivity.this, "La hora de fin debe ser mayor a la de inicio", Toast.LENGTH_SHORT).show();
-                                                                                    }
+                                                                                    //ENVIAR NOTIFICACION AL USARIO
+                                                                                    FirebaseDatabase.getInstance().getReference().child("Tooken").addValueEventListener(new ValueEventListener() {
+                                                                                        @Override
+                                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                                            if (snapshot.exists()) {
+                                                                                                String us = snapshot.child(idToken).getValue().toString();
+                                                                                                //Toast.makeText(AgregarTurnosActivity.this, us, Toast.LENGTH_SHORT).show();
+                                                                                                //mDataBase.child("Turnos").child(id).child("id_usuario").setValue(us);
+                                                                                                Toast.makeText(TurnosProgramadosActivity.this, us, Toast.LENGTH_SHORT).show();
 
-                                                                            }catch(Exception e){
+                                                                                                notificarCambioTurno(us, "Reasignación de Turno", "Su horario ha sido modificado: "+inicioEntretiempo+" - "+finEntretiempo);
+                                                                                                Toast.makeText(TurnosProgramadosActivity.this, "Turno Modificado", Toast.LENGTH_SHORT).show();
+
+                                                                                            }
+                                                                                        }
+
+
+                                                                                        @Override
+                                                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                                                            Toast.makeText(TurnosProgramadosActivity.this, "Error al modificar", Toast.LENGTH_SHORT).show();
+                                                                                        }
+                                                                                    });
+
+
+                                                                                } else {
+                                                                                    Toast.makeText(TurnosProgramadosActivity.this, "La hora de fin debe ser mayor a la de inicio", Toast.LENGTH_SHORT).show();
+                                                                                }
+
+                                                                            } catch (Exception e) {
 
                                                                             }
 
@@ -224,11 +273,11 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                         finEntretiempo.setText(horasFinT + ":" + minutosFinT);
                                                                     }*/
 
-                                                                    horasInicio=Integer.valueOf(inicioEntretiempo.getText().toString().substring(0,2));
-                                                                    minutosInicio=Integer.valueOf(inicioEntretiempo.getText().toString().substring(3,5));
+                                                                    horasInicio = Integer.valueOf(inicioEntretiempo.getText().toString().substring(0, 2));
+                                                                    minutosInicio = Integer.valueOf(inicioEntretiempo.getText().toString().substring(3, 5));
 
-                                                                    horasFin=Integer.valueOf(finEntretiempo.getText().toString().substring(0,2));
-                                                                    minutosFin=Integer.valueOf(finEntretiempo.getText().toString().substring(3,5));
+                                                                    horasFin = Integer.valueOf(finEntretiempo.getText().toString().substring(0, 2));
+                                                                    minutosFin = Integer.valueOf(finEntretiempo.getText().toString().substring(3, 5));
 
                                                                     inicioEntretiempo.setOnClickListener(new View.OnClickListener() {
                                                                         @Override
@@ -333,6 +382,37 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
         adapter.startListening();*/
     }
 
+    private void notificarCambioTurno(String token, String titulo, String detalle) {
+        RequestQueue myRequest = Volley.newRequestQueue(getApplicationContext());
+        JSONObject json = new JSONObject();
+        try {
+            //  String token = idToken;//"dCUbFpgEQCeIrQ4zb9mdBl:APA91bENfPIFtpXzOuxRyOyNpIenaXqDn8ahqRb-6fZa2z5HGhMufry56VRkcB7r9wdRtFFqOcoMR0Ay0HSN92a82JqmsqrELYfsxBO8bmw-_67qBCsc5v22Hz1KSaFa3Yr1Gn1UYcGA";
+            json.put("to", token);
+            JSONObject notificacion = new JSONObject();
+            notificacion.put("titulo", titulo);
+            notificacion.put("detalle", detalle);
+
+            json.put("data", notificacion);
+
+            //String URL = "https://fcm.googleapis.com/v1/projects/myproject-b5ae1/messages:send";
+            String URL = "https://fcm.googleapis.com/fcm/send";
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, json, null, null) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put("content-type", "application/json");
+                    header.put("authorization", "key=AAAA_acuMaE:APA91bFKH0xbAtaTxRrBrWoWzGi4C3t3LxHjq0FeCcLr-7fVar510aoypvTBqhfuvj1YK6p9STBzPkgFz5czIqTrmpErG3XiG5ICBncnKP9ODXDxaa58wY5h9DHEKQ3LktVEXGc7Te1t");
+                    return header;
+                }
+            };
+            myRequest.add(request);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     class myviewholder extends RecyclerView.ViewHolder {
         TextView horaInicioTurno, horaFinTurno, estadoTurno, nombreTurno, numeroTurno;
 
@@ -354,4 +434,5 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
 }
