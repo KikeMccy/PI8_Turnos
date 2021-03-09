@@ -59,7 +59,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Search institutions to request appointments"
+            android:text="Buscar instituciones para solicitar turnos"
             android:gravity="center"
             android:textSize="16dp"
             android:textColor="@color/black"
@@ -87,7 +87,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View my requested shifts"
+            android:text="Visualizar mis turnos solicitados"
             android:gravity="center"
             android:textSize="16dp"
             android:textColor="@color/black"
