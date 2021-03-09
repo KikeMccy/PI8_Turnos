@@ -110,15 +110,20 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                 holder.nombreTurno.setText("");
                                             else
                                                 holder.nombreTurno.setText(model.getNombre_usuario());
+
                                             holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(TurnosProgramadosActivity.this);
+                                                    CharSequence[] items = null;
 
-                                                    if (model.getEstado().equals("libre")||model.getEstado().equals("ocupado")) {
+                                                    if (model.getEstado().equals("libre")) {
                                                         String idTurno = getRef(position).getKey();
                                                         //Toast.makeText(ListaRecordatoriosActivity.this,id, Toast.LENGTH_SHORT).show();
-                                                        AlertDialog.Builder builder = new AlertDialog.Builder(TurnosProgramadosActivity.this);
-                                                        CharSequence[] items = new CharSequence[3];
+                                                       /* AlertDialog.Builder builder = new AlertDialog.Builder(TurnosProgramadosActivity.this);
+                                                        CharSequence[] items = new CharSequence[3];*/
+                                                        builder = new AlertDialog.Builder(TurnosProgramadosActivity.this);
+                                                        items = new CharSequence[3];
                                                         items[0] = "Eliminar Turno";
                                                         items[1] = "Modificar";
                                                         items[2] = "Cancelar";
@@ -256,7 +261,7 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                     mBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                                                                         @Override
                                                                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                                                                                return;
                                                                         }
                                                                     });
                                                                     mBuilder.setView(mView);
@@ -333,6 +338,46 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                         AlertDialog dialog = builder.create();
                                                         dialog.show();
                                                     }
+
+
+                                                    else{
+                                                        if(model.getEstado().equals("ocupado"))
+                                                        {
+                                                            String idTurno = getRef(position).getKey();
+                                                            
+                                                            builder = new AlertDialog.Builder(TurnosProgramadosActivity.this);
+                                                            items = new CharSequence[2];
+                                                            items[0] = "Atender Turno";
+                                                            items[1] = "Cancelar";
+                                                            builder.setItems(items, new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                                    if (i == 0) {
+                                                                        FirebaseDatabase.getInstance().getReference()
+                                                                                .child("Turnos").child(id).child("horario").child(idTurno).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                if (task.isSuccessful()) {
+                                                                                    Toast.makeText(TurnosProgramadosActivity.this, "Turno Atendido", Toast.LENGTH_SHORT).show();
+                                                                                } else {
+                                                                                    Toast.makeText(TurnosProgramadosActivity.this, "Remove Failed", Toast.LENGTH_SHORT).show();
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                    else
+                                                                        return;
+                                                                }
+                                                            });
+                                                            builder.setCancelable(false);
+                                                            AlertDialog dialog = builder.create();
+                                                            dialog.show();
+
+                                                        }
+                                                    }
+
+
+
                                                 }
                                             });
                                         }
@@ -397,7 +442,6 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
 
             json.put("data", notificacion);
 
-            //String URL = "https://fcm.googleapis.com/v1/projects/myproject-b5ae1/messages:send";
             String URL = "https://fcm.googleapis.com/fcm/send";
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, json, null, null) {
