@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="200dp"
-    app:background="@drawable/fondo_p_a"
+    android:background="#9C27B0"
     android:gravity="bottom"
     android:ellipsize="end"
     android:maxLines="1"
     android:padding="20dp">
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         app:srcCompat="@drawable/circled_user_male_skin_type_7_128px"
         >
     </ImageView>
@@ -23,7 +23,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/aclonica"
         android:text="Usuario"
-        android:textColor="#9C27B0"
+        android:textColor="@color/white"
         android:textSize="15sp" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/aclonica"
         android:text="Correo electronico"
-        android:textColor="#9C27B0"
+        android:textColor="@color/white"
         android:textSize="12sp" />
 
 </LinearLayout>

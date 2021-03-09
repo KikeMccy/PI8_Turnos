@@ -55,8 +55,15 @@
             android:text="MIS INSTITUCIONES"
             android:textColor="#9C27B0"
             android:textSize="20dp"
-            android:layout_marginTop="20dp"
             android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visualizar mis instiuciones creadas"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            />
 
         <ImageView
             android:id="@+id/img_add_instituciones"
@@ -78,6 +85,14 @@
             android:layout_marginTop="20dp"
             android:textSize="20dp"
             android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingresar nueva institución"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            />
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view_generar_turnos"
