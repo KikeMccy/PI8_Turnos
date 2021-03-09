@@ -170,7 +170,6 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
 
                                                                                 if (com.equals("1")) {
 
-
                                                                                     FirebaseDatabase.getInstance().getReference().child("TurnosAsignados").addListenerForSingleValueEvent(new ValueEventListener() {
                                                                                         @Override
                                                                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -344,7 +343,7 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                         if(model.getEstado().equals("ocupado"))
                                                         {
                                                             String idTurno = getRef(position).getKey();
-                                                            
+
                                                             builder = new AlertDialog.Builder(TurnosProgramadosActivity.this);
                                                             items = new CharSequence[2];
                                                             items[0] = "Atender Turno";
@@ -364,6 +363,30 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                                 }
                                                                             }
                                                                         });
+
+
+                                                                        FirebaseDatabase.getInstance().getReference().child("TurnosAsignados").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                            @Override
+                                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                                if (snapshot.exists()) {
+                                                                                    for (DataSnapshot ds : snapshot.getChildren()) {
+                                                                                        String turno = ds.child("id_horario").getValue().toString();
+
+                                                                                        if (turno.equals(idTurno)) {
+                                                                                            idTurnoAsignado = ds.getKey();
+                                                                                            FirebaseDatabase.getInstance().getReference().child("TurnosAsignados").child(idTurnoAsignado).removeValue();//.child("hora_inicio").setValue(inicioEntretiempo.getText().toString());
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                            }
+                                                                        });
+
+
                                                                     }
                                                                     else
                                                                         return;
