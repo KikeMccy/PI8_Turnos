@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -204,7 +205,10 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                                                 String us = snapshot.child(idToken).getValue().toString();
                                                                                                 notificarCambioTurno(us, "Reasignación de Turno", "Su horario ha sido modificado: "+inicioEntretiempo.getText().toString()+" - "+finEntretiempo.getText().toString());
                                                                                                 Toast.makeText(TurnosProgramadosActivity.this, "Turno Modificado", Toast.LENGTH_SHORT).show();
-
+                                                                                                Intent intent = new Intent(TurnosProgramadosActivity.this, InstitucionesUserActivity.class);
+                                                                                                //intent.putExtra("id_institucion", id);
+                                                                                                startActivity(intent);
+                                                                                                finish();
                                                                                             }
                                                                                         }
 
