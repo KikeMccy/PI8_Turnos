@@ -196,19 +196,21 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                                     FirebaseDatabase.getInstance().getReference().child("Turnos").child(id).child("horario").child(idTurno).child("hora_inicio").setValue(inicioEntretiempo.getText().toString());
                                                                                     FirebaseDatabase.getInstance().getReference().child("Turnos").child(id).child("horario").child(idTurno).child("hora_fin").setValue(finEntretiempo.getText().toString());
 
+                                                                                    Intent intent = new Intent(TurnosProgramadosActivity.this, InstitucionesUserActivity.class);
+                                                                                    //intent.putExtra("id_institucion", id);
+                                                                                    startActivity(intent);
 
+                                                                                    finish();
+                                                                                    Toast.makeText(TurnosProgramadosActivity.this, "Turno Modificado", Toast.LENGTH_SHORT).show();
                                                                                     //ENVIAR NOTIFICACION AL USARIO
-                                                                                    FirebaseDatabase.getInstance().getReference().child("Tooken").addValueEventListener(new ValueEventListener() {
+                                                                                    /*FirebaseDatabase.getInstance().getReference().child("Tooken").addValueEventListener(new ValueEventListener() {
                                                                                         @Override
                                                                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                                                             if (snapshot.exists()) {
-                                                                                                String us = snapshot.child(idToken).getValue().toString();
-                                                                                                notificarCambioTurno(us, "Reasignación de Turno", "Su horario ha sido modificado: "+inicioEntretiempo.getText().toString()+" - "+finEntretiempo.getText().toString());
-                                                                                                Toast.makeText(TurnosProgramadosActivity.this, "Turno Modificado", Toast.LENGTH_SHORT).show();
-                                                                                                Intent intent = new Intent(TurnosProgramadosActivity.this, InstitucionesUserActivity.class);
-                                                                                                //intent.putExtra("id_institucion", id);
-                                                                                                startActivity(intent);
-                                                                                                finish();
+                                                                                                //String us = snapshot.child(idToken).getValue().toString();
+                                                                                                //notificarCambioTurno(us, "Reasignación de Turno", "Su horario ha sido modificado: "+inicioEntretiempo.getText().toString()+" - "+finEntretiempo.getText().toString());
+
+
                                                                                             }
                                                                                         }
 
@@ -217,7 +219,7 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                                         public void onCancelled(@NonNull DatabaseError error) {
                                                                                             Toast.makeText(TurnosProgramadosActivity.this, "Error al modificar", Toast.LENGTH_SHORT).show();
                                                                                         }
-                                                                                    });
+                                                                                    });*/
 
 
                                                                                 } else {
