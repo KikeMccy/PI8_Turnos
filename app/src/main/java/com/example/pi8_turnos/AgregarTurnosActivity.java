@@ -376,7 +376,10 @@ public class AgregarTurnosActivity extends AppCompatActivity {
 
             Toast toast = Toast.makeText(getApplicationContext(), "Turnos agregados correctamente", Toast.LENGTH_SHORT);
             toast.show();
-            super.onBackPressed();
+
+
+            finish();
+            //super.onBackPressed();
         } catch (Exception e) {
             Toast toast = Toast.makeText(getApplicationContext(), "Error al guardar", Toast.LENGTH_SHORT);
             toast.show();

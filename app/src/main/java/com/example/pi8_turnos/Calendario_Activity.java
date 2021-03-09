@@ -342,7 +342,7 @@ public class Calendario_Activity extends AppCompatActivity{ //implements Calenda
     }*/
 
 
-    @Override
+   /* @Override
     protected void onStart() {
         super.onStart();
 
@@ -421,6 +421,6 @@ public class Calendario_Activity extends AppCompatActivity{ //implements Calenda
             finish();
         }
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
 }

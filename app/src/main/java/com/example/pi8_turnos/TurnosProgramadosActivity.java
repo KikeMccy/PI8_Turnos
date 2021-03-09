@@ -202,10 +202,6 @@ public class TurnosProgramadosActivity extends AppCompatActivity {
                                                                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                                                             if (snapshot.exists()) {
                                                                                                 String us = snapshot.child(idToken).getValue().toString();
-                                                                                                //Toast.makeText(AgregarTurnosActivity.this, us, Toast.LENGTH_SHORT).show();
-                                                                                                //mDataBase.child("Turnos").child(id).child("id_usuario").setValue(us);
-                                                                                                //Toast.makeText(TurnosProgramadosActivity.this, us, Toast.LENGTH_SHORT).show();
-
                                                                                                 notificarCambioTurno(us, "Reasignación de Turno", "Su horario ha sido modificado: "+inicioEntretiempo.getText().toString()+" - "+finEntretiempo.getText().toString());
                                                                                                 Toast.makeText(TurnosProgramadosActivity.this, "Turno Modificado", Toast.LENGTH_SHORT).show();
 
