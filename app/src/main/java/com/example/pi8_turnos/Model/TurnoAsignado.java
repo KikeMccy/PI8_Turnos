@@ -1,12 +1,12 @@
 package com.example.pi8_turnos.Model;
 
 public class TurnoAsignado {
-    private String fecha,hora_inicio,hora_fin,nombre_institucion,id_turno,id_horario, id_institucion;
+    private String fecha,hora_inicio,hora_fin,nombre_institucion,id_turno,id_horario, id_institucion, estado;
 
     public TurnoAsignado() {
     }
 
-    public TurnoAsignado(String fecha, String hora_inicio, String hora_fin, String nombre_institucion, String id_turno, String id_horario, String id_institucion) {
+    public TurnoAsignado(String fecha, String hora_inicio, String hora_fin, String nombre_institucion, String id_turno, String id_horario, String id_institucion, String estado) {
         this.fecha = fecha;
         this.hora_inicio = hora_inicio;
         this.hora_fin = hora_fin;
@@ -14,6 +14,7 @@ public class TurnoAsignado {
         this.id_turno = id_turno;
         this.id_horario = id_horario;
         this.id_institucion=id_institucion;
+        this.estado=estado;
     }
 
     public String getFecha() {
@@ -46,6 +47,14 @@ public class TurnoAsignado {
 
     public void setNombre_institucion(String nombre_institucion) {
         this.nombre_institucion = nombre_institucion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getId_turno() {

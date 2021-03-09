@@ -32,7 +32,7 @@
         android:fontFamily="@font/aclonica"
         android:gravity="center"
         android:text="REGISTRO DE INSTITUCIONES"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="#9C27B0"
         android:textSize="24sp"/>
     <ScrollView
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
               android:layout_marginTop="15dp"
               android:clickable="true"
               android:scaleType="centerInside"
-              android:src="@drawable/buscar_img_instituciones" />
+              android:src="@drawable/image_96px" />
             ></LinearLayout>
             <ImageView
 
@@ -115,7 +115,7 @@
                 android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/ubicacion" />
+                android:src="@drawable/user_location_96px" />
 
 
                 <TextView
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="Ubicacion GPS       "
+                    android:text="Ubicacion GPS"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -149,15 +149,16 @@
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
+
             <EditText
                 android:id="@+id/txt_nombre_institucion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre institución"
-                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                />
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@drawable/icono_institucion"
+                android:hint="Nombre institución" />
     <Button
         android:id="@+id/btn_cargar_foto"
         android:layout_width="match_parent"

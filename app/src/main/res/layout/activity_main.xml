@@ -32,7 +32,7 @@
             android:text="TURNO MOVIL"
             android:fontFamily="@font/aclonica"
             android:textSize="30dp"
-            android:textColor="#0027FF"
+            android:textColor="#9C27B0"
             android:layout_marginTop="270dp"
             android:gravity="center"
             />

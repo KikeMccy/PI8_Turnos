@@ -31,7 +31,7 @@
         android:fontFamily="@font/aclonica"
         android:gravity="center"
         android:text="HORARIOS"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="#9C27B0"
         android:textSize="24sp"/>
     <TextView
         android:id="@+id/textView_titulo_instituciones"

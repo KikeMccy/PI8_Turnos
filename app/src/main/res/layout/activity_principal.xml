@@ -34,7 +34,7 @@
             android:fontFamily="@font/aclonica"
             android:gravity="center"
             android:text="BIENVENIDO"
-            android:textColor="@android:color/holo_orange_light"
+            android:textColor="#9C27B0"
             android:textSize="30dp"
             android:textStyle="bold" />
         <ImageView
@@ -55,8 +55,15 @@
             android:text="INSTITUCIONES"
             android:textColor="#9C27B0"
             android:textSize="20dp"
-            android:layout_marginTop="20dp"
             android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search institutions to request appointments"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            />
 
         <ImageView
             android:id="@+id/img_abir_mis_turnos"
@@ -75,9 +82,16 @@
             android:gravity="center"
             android:text="MIS TURNOS"
             android:textColor="#9C27B0"
-            android:layout_marginTop="20dp"
             android:textSize="20dp"
             android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View my requested shifts"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            />
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

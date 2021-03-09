@@ -29,7 +29,7 @@
         android:gravity="center"
         android:fontFamily="@font/aclonica"
         android:layout_below="@+id/appbar"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="#9C27B0"
         android:text="ASIGNACIÓN DE TURNOS"
         android:textSize="24sp" />
 

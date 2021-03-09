@@ -31,7 +31,7 @@
         android:gravity="center"
 
         android:text="CALIFICAR INSTITUCIÓN"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="#9C27B0"
         android:textSize="24sp"></TextView>
 
     <TextView
@@ -69,17 +69,18 @@
         ></TextView>
 
 
-    <EditText
-        android:id="@+id/txt_comentario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Describe tu experiencia..."
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:inputType="textMultiLine"></EditText>
+        <EditText
+            android:id="@+id/txt_comentario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:drawableEnd="@drawable/icono_sugerencias"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Describe tu experiencia..."
+            android:inputType="textMultiLine"></EditText>
     <Button
         android:id="@+id/btn_comentar"
         android:layout_width="match_parent"

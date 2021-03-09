@@ -18,7 +18,7 @@
         android:fontFamily="@font/aclonica"
         android:gravity="center"
         android:text="REGISTRO DE USUARIOS"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="#9C27B0"
         android:textSize="25dp"
         android:textStyle="bold" />
     <LinearLayout android:layout_width="match_parent"
@@ -58,38 +58,42 @@
             android:gravity="bottom"
             android:orientation="vertical"
             >
+
             <EditText
                 android:id="@+id/txt_cedula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:drawableEnd="@drawable/icono_identi"
                 android:hint="Cédula"
-                android:inputType="number"
-                />
-    <EditText
-        android:id="@+id/txt_nombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombres"
-        android:layout_marginTop="20dp"
-        />
-    <EditText
-        android:id="@+id/txt_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="Correo electronico"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        />
-    <EditText
-        android:id="@+id/txt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:layout_marginTop="20dp"
-        android:inputType="textPassword"
-        />
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/txt_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableEnd="@drawable/icono_perfil"
+                android:hint="Nombres" />
+
+            <EditText
+                android:id="@+id/txt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableEnd="@drawable/icono_email"
+                android:ems="10"
+                android:hint="Correo electronico"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableEnd="@drawable/icono_password"
+                android:hint="Contraseña"
+                android:inputType="textPassword" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

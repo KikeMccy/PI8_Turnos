@@ -2,6 +2,7 @@ package com.example.pi8_turnos;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -13,6 +14,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -184,52 +186,71 @@ public class InstitucionesActivity extends AppCompatActivity  implements Navigat
                 subir.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String nombre_ins = txt_nombre.getText().toString().trim();
-                        if (nombre_ins.equals("")) {
-                            txt_nombre.setError("Requiere nombre");
-                        }else {
-                        cargado.setTitle("Creando institución...");
-                        cargado.setMessage("Espere por favor...");
-                        cargado.show();
-                        StorageReference ref = storageReference.child(aleatorio);
-                        UploadTask uploadTask = ref.putBytes(bytes);
-                        Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                            @Override
-                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                if (!task.isSuccessful()) {
-                                    throw Objects.requireNonNull(task.getException());
-                                }
-                                return ref.getDownloadUrl();
 
-                            }
-                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                Uri downloaduri = task.getResult();
+                        AlertDialog.Builder builder=new AlertDialog.Builder(InstitucionesActivity.this);
+                        builder.setTitle("!Alerta¡");
+                        builder.setMessage("¿Desea asignar turno en el horario de ")
+                                .setCancelable(false)
+                                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                String nombre_ins = txt_nombre.getText().toString().trim();
+                                                if (nombre_ins.equals("")) {
+                                                    txt_nombre.setError("Requiere nombre");
+                                                }else {
+                                                    cargado.setTitle("Creando institución...");
+                                                    cargado.setMessage("Espere por favor...");
+                                                    cargado.show();
+                                                    StorageReference ref = storageReference.child(aleatorio);
+                                                    UploadTask uploadTask = ref.putBytes(bytes);
+                                                    Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                                        @Override
+                                                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                                            if (!task.isSuccessful()) {
+                                                                throw Objects.requireNonNull(task.getException());
+                                                            }
+                                                            return ref.getDownloadUrl();
 
-                                Map<String, Object> map = new HashMap<>();
-                                map.put("idusuario", id_user);
-                                map.put("nombreusuario", nombre);
-                                map.put("nombreinstitucion", nombre_ins);
-                                map.put("urlimagen", downloaduri.toString());
-                                map.put("latitud", latitud.toString());
-                                map.put("longitud", longitud.toString());
+                                                        }
+                                                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Uri> task) {
+                                                            Uri downloaduri = task.getResult();
 
-                                databaseReference.child("Instituciones").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            Map<String, Object> map = new HashMap<>();
+                                                            map.put("idusuario", id_user);
+                                                            map.put("nombreusuario", nombre);
+                                                            map.put("nombreinstitucion", nombre_ins);
+                                                            map.put("urlimagen", downloaduri.toString());
+                                                            map.put("latitud", latitud.toString());
+                                                            map.put("longitud", longitud.toString());
+
+                                                            databaseReference.child("Instituciones").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task2) {
+                                                                    if (task2.isSuccessful()) {
+                                                                        startActivity(new Intent(InstitucionesActivity.this, InstitucionesUserActivity.class));
+                                                                    } else {
+                                                                        Toast.makeText(InstitucionesActivity.this, "No se pudo crear los datos correctamente", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+                                                            });
+                                                            cargado.dismiss();
+                                                            Toast.makeText(InstitucionesActivity.this, "Institucion cargada con exito", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Void> task2) {
-                                        if (task2.isSuccessful()) {
-                                            startActivity(new Intent(InstitucionesActivity.this, InstitucionesUserActivity.class));
-                                        } else {
-                                            Toast.makeText(InstitucionesActivity.this, "No se pudo crear los datos correctamente", Toast.LENGTH_SHORT).show();
-                                        }
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
                                     }
-                                });
-                                cargado.dismiss();
-                                Toast.makeText(InstitucionesActivity.this, "Institucion cargada con exito", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
+                                }).show();
+
+
+                        ///
                     }
                 });
 

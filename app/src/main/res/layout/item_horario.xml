@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="#D4F9E8"
+        app:cardBackgroundColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,7 +44,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/tiket_turno" />
+                android:src="@drawable/ticket_96px" />
 
             ></LinearLayout>
         <LinearLayout
@@ -141,7 +141,7 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:scaleType="centerInside"
-                android:src="@drawable/asignar_turno" />
+                android:src="@drawable/request_money_96px" />
 
 
 

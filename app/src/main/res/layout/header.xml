@@ -23,7 +23,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/aclonica"
         android:text="Usuario"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="#9C27B0"
         android:textSize="15sp" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/aclonica"
         android:text="Correo electronico"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="#9C27B0"
         android:textSize="12sp" />
 
 </LinearLayout>

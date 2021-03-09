@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Turno movil</string>
+    <string name="notification_channel_group_general">General</string>
+    <string name="app_name">TURNO MOVIL</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

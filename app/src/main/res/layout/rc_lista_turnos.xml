@@ -21,77 +21,137 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            >
             <TextView
-                android:id="@+id/rvTituloDescripcionTurno"
-                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imgPortada"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Titulo turno"
-                app:layout_constraintTop_toBottomOf="@+id/imgPortada" />
-
-           <!-- <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"> -->
-
-                <TextView
-                    android:id="@+id/rvHoraInicioTurno"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:text="Hora Inicio"
-                    android:textColor="#8A000000" />
-
-                <TextView
-                    android:id="@+id/rvHoraFinTurno"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:text="Hora Fin"
-                    android:textColor="#8A000000" />
-
-            <TextView
-                android:id="@+id/rvNumeroTurno"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center"
-                android:text="Numero"
-                android:textColor="#8A000000" />
-
+                android:text="Cliente: "
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/rvNombreTurno"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
+                android:layout_marginStart="10dp"
                 android:text="Usuario"
+                android:textSize="16dp"
                 android:textColor="#8A000000" />
+        </LinearLayout>
 
-
-           <!-- </LinearLayout>-->
-            <!--<TextView
-                android:id="@+id/rvFechaListaRecordatorios"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Turno: "
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/rvNumeroTurno"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:textSize="16dp"
+                android:layout_marginStart="10dp"
                 android:gravity="center"
-                android:text="Fecha recordatorio"
-                android:textColor="#8A000000" />-->
+                android:text="Numero"
+                android:textColor="#8A000000" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estado: "
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/rvTituloDescripcionTurno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgPortada"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:layout_marginStart="10dp"
+                android:text="Titulo turno"
+                app:layout_constraintTop_toBottomOf="@+id/imgPortada" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hora Inicio: : "
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/rvHoraInicioTurno"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="Hora Inicio"
+                android:textSize="16dp"
+                android:textColor="#8A000000" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hora Fin: "
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/rvHoraFinTurno"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="Hora Fin"
+                android:textSize="16dp"
+                android:textColor="#8A000000" />
+        </LinearLayout>
+
+
+
+
+
+
+
 
             <RelativeLayout
                 android:id="@+id/expandableView"

@@ -33,7 +33,7 @@
         android:fontFamily="@font/aclonica"
         android:gravity="center"
         android:text="INSTITUCIONES"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="#9C27B0"
         android:textSize="30dp"
         android:textStyle="bold" />
     <TextView
@@ -41,16 +41,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="Seleccione una institucion: "
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold|italic" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="En este modulo usted puede acceder a una institución y visualizar los turnos disponibles."
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcl_listado_instituciones"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         tools:layout_editor_absoluteX="36dp"
         tools:layout_editor_absoluteY="128dp" />
 

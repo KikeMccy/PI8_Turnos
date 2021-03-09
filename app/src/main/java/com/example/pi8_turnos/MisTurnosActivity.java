@@ -91,87 +91,91 @@ public class MisTurnosActivity extends AppCompatActivity implements NavigationVi
                 new FirebaseRecyclerAdapter<TurnoAsignado, myviewholder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull myviewholder holder, final int position, @NonNull TurnoAsignado model) {
-                        holder.nombreinstitucion.setText(model.getNombre_institucion());
-                        holder.hora_inicio.setText(model.getHora_inicio());
-                        holder.hora_fin.setText(model.getHora_fin());
-                        holder.fecha.setText(model.getFecha());
-                        String id_turno = model.getId_turno();
-                        String id_horario = model.getId_horario();
-                        String id_institucion=model.getId_institucion();
 
-                        holder.qr_code.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                databaseReference.child("Instituciones").child(id_institucion).addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if(snapshot.exists()){
-                                            String nombre_usuario=snapshot.child("nombreusuario").getValue().toString();
-                                            Intent intent =new Intent(MisTurnosActivity.this, QRCodeActivity.class);
-                                            String mensaje="Ust tiene un turno en la institución: "+ model.getNombre_institucion()+".\n"+"Con el usuario: "+nombre_usuario+".\n"+"En la fecha: "+ model.getFecha()+".\n"+"En el horario de : "+model.getHora_inicio()+" y "+model.getHora_fin();
-                                            intent.putExtra("mensaje",mensaje);
-                                            startActivity(intent);
+                        if (model.getEstado().equals("pendiente")) {
+                            holder.nombreinstitucion.setText(model.getNombre_institucion());
+                            holder.hora_inicio.setText(model.getHora_inicio());
+                            holder.hora_fin.setText(model.getHora_fin());
+                            holder.fecha.setText(model.getFecha());
+                            String id_turno = model.getId_turno();
+                            String id_horario = model.getId_horario();
+                            String id_institucion = model.getId_institucion();
+
+                            holder.qr_code.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    databaseReference.child("Instituciones").child(id_institucion).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                String nombre_usuario = snapshot.child("nombreusuario").getValue().toString();
+                                                Intent intent = new Intent(MisTurnosActivity.this, QRCodeActivity.class);
+                                                String mensaje = "Ust tiene un turno en la institución: " + model.getNombre_institucion() + ".\n" + "Con el usuario: " + nombre_usuario + ".\n" + "En la fecha: " + model.getFecha() + ".\n" + "En el horario de : " + model.getHora_inicio() + " y " + model.getHora_fin();
+                                                intent.putExtra("mensaje", mensaje);
+                                                startActivity(intent);
+                                            }
                                         }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                    }
-                                });
 
-                            }
-                        });
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });
 
-                        holder.cancelar_turno.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                AlertDialog.Builder builder=new AlertDialog.Builder(MisTurnosActivity.this);
-                                builder.setTitle("!Alerta¡");
-                                builder.setMessage("¿Desea cancelar el turno?")
-                                        .setCancelable(false)
-                                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                String id = getRef(position).getKey();
-                                                databaseReference.child("TurnosAsignados").child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            Map<String, Object> map = new HashMap<>();
-                                                            map.put("estado", "libre");
-                                                            map.put("nombre_usuario", "ninguno");
-                                                            databaseReference.child("Turnos").child(id_turno).child("horario").child(id_horario).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task2) {
-                                                                    if (task2.isSuccessful()) {
-                                                                        //Snackbar snackbar=Snackbar.make(drawerLayout, "Turno cancelado", Snackbar.LENGTH_SHORT);
-                                                                        //snackbar.show();
-                                                                        Toast.makeText(MisTurnosActivity.this, "Turno cancelado", Toast.LENGTH_SHORT).show();
-                                                                        //isActive=true;
-                                                                        //content();
-                                                                        startActivity(new Intent(MisTurnosActivity.this,PrincipalActivity.class));
-                                                                    } else {
-                                                                        //Snackbar snackbar=Snackbar.make(drawerLayout, "Error al cancelar el turno", Snackbar.LENGTH_SHORT);
-                                                                        //snackbar.show();
-                                                                        Toast.makeText(MisTurnosActivity.this, "Error al cancelar turno", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            holder.cancelar_turno.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MisTurnosActivity.this);
+                                    builder.setTitle("!Alerta¡");
+                                    builder.setMessage("¿Desea cancelar el turno?")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    String id = getRef(position).getKey();
+                                                    databaseReference.child("TurnosAsignados").child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Map<String, Object> map = new HashMap<>();
+                                                                map.put("estado", "libre");
+                                                                map.put("nombre_usuario", "ninguno");
+                                                                databaseReference.child("Turnos").child(id_turno).child("horario").child(id_horario).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task2) {
+                                                                        if (task2.isSuccessful()) {
+                                                                            //Snackbar snackbar=Snackbar.make(drawerLayout, "Turno cancelado", Snackbar.LENGTH_SHORT);
+                                                                            //snackbar.show();
+                                                                            Toast.makeText(MisTurnosActivity.this, "Turno cancelado", Toast.LENGTH_SHORT).show();
+                                                                            //isActive=true;
+                                                                            //content();
+                                                                            startActivity(new Intent(MisTurnosActivity.this, PrincipalActivity.class));
+                                                                        } else {
+                                                                            //Snackbar snackbar=Snackbar.make(drawerLayout, "Error al cancelar el turno", Snackbar.LENGTH_SHORT);
+                                                                            //snackbar.show();
+                                                                            Toast.makeText(MisTurnosActivity.this, "Error al cancelar turno", Toast.LENGTH_SHORT).show();
+                                                                        }
+
                                                                     }
+                                                                });
 
-                                                                }
-                                                            });
-
+                                                            }
                                                         }
-                                                    }
-                                                });
-                                            }
-                                        })
-                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                dialogInterface.cancel();
-                                            }
-                                        }).show();
+                                                    });
+                                                }
+                                            })
+                                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.cancel();
+                                                }
+                                            }).show();
 
-                            }
-                        });
+                                }
+                            });
+                        }
                     }
 
 

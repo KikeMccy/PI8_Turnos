@@ -76,7 +76,7 @@
                 android:layout_height="60dp"
                 android:clickable="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/ticket_turno" />
+                android:src="@drawable/ticket_96px" />
 
         </LinearLayout>
 

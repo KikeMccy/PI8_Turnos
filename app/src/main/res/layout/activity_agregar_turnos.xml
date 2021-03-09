@@ -27,7 +27,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/aclonica"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="#9C27B0"
         android:layout_below="@+id/appbar_add_turnos"
         android:text="PROGRAMAR TURNOS"
         android:textSize="24sp" />

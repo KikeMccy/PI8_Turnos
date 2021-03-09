@@ -18,8 +18,8 @@
         android:gravity="center"
 
         android:text="MI PERFIL"
-        android:textColor="@android:color/holo_orange_light"
-        android:textSize="24sp"></TextView>
+        android:textColor="#9C27B0"
+        android:textSize="25sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,27 +47,56 @@
             android:gravity="bottom"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cédula:"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                />
+
             <EditText
                 android:id="@+id/txt_cedula_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="5dp"
+                android:drawableEnd="@drawable/icono_identi"
                 android:hint="Cedula" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombres:"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                />
 
             <EditText
                 android:id="@+id/txt_nombre_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+                android:drawableEnd="@drawable/icono_perfil"
                 android:hint="Nombre" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Correo electronico:"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                />
 
             <EditText
                 android:id="@+id/txt_email_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:enabled="false"
+                android:layout_marginTop="5dp"
                 android:clickable="false"
+                android:drawableEnd="@drawable/icono_email"
+                android:enabled="false"
                 android:hint="Email" />
 
 
